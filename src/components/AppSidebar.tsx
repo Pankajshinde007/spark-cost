@@ -10,6 +10,7 @@ import {
   Activity,
   ChevronLeft,
   ChevronRight,
+  Settings,
 } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -19,6 +20,7 @@ const navItems = [
   { path: "/cloud-accounts", label: "Cloud Accounts", icon: Cloud },
   { path: "/alerts", label: "Alerts", icon: AlertTriangle },
   { path: "/recommendations", label: "Optimization", icon: Lightbulb },
+  { path: "/settings", label: "Settings", icon: Settings },
 ];
 
 const adminItems = [

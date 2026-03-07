@@ -10,6 +10,7 @@ import AlertsPage from "./pages/AlertsPage";
 import RecommendationsPage from "./pages/RecommendationsPage";
 import CloudAccountsPage from "./pages/CloudAccountsPage";
 import AdminPage from "./pages/AdminPage";
+import SettingsPage from "./pages/SettingsPage";
 import NotFound from "./pages/NotFound";
 import { ReactNode } from "react";
 
@@ -47,6 +48,7 @@ const App = () => (
             <Route path="/cloud-accounts" element={<ProtectedRoute><CloudAccountsPage /></ProtectedRoute>} />
             <Route path="/alerts" element={<ProtectedRoute><AlertsPage /></ProtectedRoute>} />
             <Route path="/recommendations" element={<ProtectedRoute><RecommendationsPage /></ProtectedRoute>} />
+            <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
             <Route path="/admin" element={<AdminRoute><AdminPage /></AdminRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
