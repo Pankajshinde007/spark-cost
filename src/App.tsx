@@ -10,6 +10,7 @@ import AlertsPage from "./pages/AlertsPage";
 import RecommendationsPage from "./pages/RecommendationsPage";
 import CloudAccountsPage from "./pages/CloudAccountsPage";
 import AdminPage from "./pages/AdminPage";
+import SettingsPage from "./pages/SettingsPage";
 import NotFound from "./pages/NotFound";
 import { ReactNode } from "react";
 
