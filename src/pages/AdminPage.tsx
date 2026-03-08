@@ -87,6 +87,7 @@ const AdminPage = () => {
       if (u.id === userId) {
         const newStatus = u.status === "active" ? "inactive" as const : "active" as const;
         toast.success(`Account ${newStatus === "active" ? "enabled" : "disabled"}`, { description: u.name });
+        addLog("status_change", `${newStatus === "active" ? "Enabled" : "Disabled"} account for ${u.name}`);
         return { ...u, status: newStatus };
       }
       return u;
