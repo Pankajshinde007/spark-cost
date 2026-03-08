@@ -263,9 +263,9 @@ const LandingPage = () => {
                   whileInView="visible"
                   viewport={{ once: true }}
                   variants={fadeUp}
-                  className="glass-card p-6 text-center"
+                  className="glass-card-hover p-6 text-center"
                 >
-                  <p className="text-4xl sm:text-5xl font-bold text-foreground">{s.value}</p>
+                  <p className="text-4xl sm:text-5xl font-bold gradient-text">{s.value}</p>
                   <p className="text-sm text-muted-foreground mt-2">{s.label}</p>
                 </motion.div>
               ))}
