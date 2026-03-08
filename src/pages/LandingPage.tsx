@@ -246,7 +246,7 @@ const LandingPage = () => {
               <p className="text-sm font-medium text-primary mb-3 tracking-wide uppercase">Real Results</p>
               <h2 className="text-3xl sm:text-4xl font-bold text-foreground">See the impact of smarter cloud spending</h2>
               <p className="mt-4 text-muted-foreground text-lg">
-                Organizations using Pankaj's monitoring system detect cost anomalies faster and cut unnecessary cloud expenses through automated analysis and clear, actionable recommendations.
+                Organizations using SparkCost's monitoring system detect cost anomalies faster and cut unnecessary cloud expenses through automated analysis and clear, actionable recommendations.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Button size="lg" onClick={() => navigate("/login")}>Start optimizing today</Button>
