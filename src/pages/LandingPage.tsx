@@ -288,7 +288,7 @@ const LandingPage = () => {
             <div className="rounded-2xl overflow-hidden border border-border/50 shadow-2xl shadow-primary/10">
               <img
                 src={dashboardPreview}
-                alt="Pankaj dashboard showing cost monitoring charts, anomaly alerts, and cost breakdown"
+                alt="SparkCost dashboard showing cost monitoring charts, anomaly alerts, and cost breakdown"
                 className="w-full"
                 loading="lazy"
               />
