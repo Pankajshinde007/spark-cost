@@ -212,8 +212,8 @@ const LandingPage = () => {
       <section id="home" className="relative overflow-hidden min-h-[95vh] flex items-center">
         <div className="hero-glow -top-40 -left-40" />
         <div className="hero-glow-purple bottom-20 right-10" />
-        <div className="hero-glow bottom-0 right-0 opacity-50" />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-[hsl(270,70%,50%)]/5" />
+        <div className="hero-glow-cyan bottom-0 right-0 opacity-40" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
         <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(hsl(215 20% 25% / 0.25) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
         <motion.div style={{ opacity: heroOpacity, scale: heroScale }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10 w-full">
