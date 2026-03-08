@@ -37,6 +37,12 @@ const LoginRoute = () => {
   return <LoginPage />;
 };
 
+const PublicRoute = () => {
+  const { isAuthenticated } = useAuth();
+  if (isAuthenticated) return <Navigate to="/dashboard" replace />;
+  return <LandingPage />;
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
