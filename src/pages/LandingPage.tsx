@@ -280,7 +280,7 @@ const LandingPage = () => {
           <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground">Powerful dashboard at your fingertips</h2>
             <p className="mt-4 text-muted-foreground text-lg">
-              SparkCost automatically collects cloud billing data and highlights cost issues before they become expensive problems.
+              The platform automatically collects cloud billing data and highlights cost issues before they become expensive problems.
             </p>
           </motion.div>
 
