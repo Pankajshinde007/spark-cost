@@ -122,11 +122,6 @@ const AdminLoginPage = () => {
             </button>
           </form>
 
-          <div className="mt-6 pt-4 border-t border-border/50">
-            <p className="text-[10px] text-muted-foreground text-center">
-              Demo credentials: <span className="text-foreground font-mono">admin@sparkcost.com</span> / <span className="text-foreground font-mono">admin123</span>
-            </p>
-          </div>
         </div>
       </motion.div>
     </div>
