@@ -1,7 +1,7 @@
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { mockUsers, mockAlerts, mockCloudAccounts, mockAnomalies } from "@/lib/mockData";
-import { Users, Shield, Cloud, AlertTriangle, Activity, Bell, BellOff, Gauge, RefreshCw } from "lucide-react";
-import { motion } from "framer-motion";
+import { Users, Shield, Cloud, AlertTriangle, Activity, Bell, BellOff, Gauge, RefreshCw, ChevronDown, UserX, UserCheck, ShieldCheck, ShieldOff } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { toast } from "sonner";
