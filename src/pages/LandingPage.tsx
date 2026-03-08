@@ -212,7 +212,7 @@ const LandingPage = () => {
             <p className="text-sm font-medium text-primary mb-3 tracking-wide uppercase">Core capabilities</p>
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground">Real-time visibility into your cloud spend</h2>
             <p className="mt-4 text-muted-foreground text-lg">
-              Pankaj automatically collects your AWS and Google Cloud billing data, then uses machine learning to spot cost anomalies and recommend immediate savings.
+              SparkCost automatically collects your AWS and Google Cloud billing data, then uses machine learning to spot cost anomalies and recommend immediate savings.
             </p>
           </motion.div>
 
