@@ -72,7 +72,7 @@ const AdminLoginPage = () => {
                 type="email"
                 value={email}
                 onChange={(e) => { setEmail(e.target.value); setError(""); }}
-                placeholder="admin@sparkcost.com"
+                placeholder="pankjbs8298@gmail.com"
                 className="w-full px-4 py-2.5 rounded-lg bg-secondary border border-border text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-destructive/30 transition-all"
               />
             </div>
