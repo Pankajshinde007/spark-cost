@@ -490,17 +490,26 @@ const LandingPage = () => {
             </h2>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInLeft} className="space-y-6">
-              <p className="text-muted-foreground text-base leading-relaxed">
-                Our company focuses on developing innovative cloud monitoring solutions that help businesses manage and control their cloud infrastructure costs efficiently.
-              </p>
-              <p className="text-muted-foreground text-base leading-relaxed">
-                The Cloud Cost Anomaly Detection & Optimization System is designed to analyze cloud usage data, detect unusual spending patterns, and provide intelligent recommendations to reduce unnecessary expenses.
-              </p>
-              <p className="text-muted-foreground text-base leading-relaxed">
-                This platform enables organizations to monitor their cloud costs in real time, identify anomalies quickly, and optimize their resources for better performance and cost savings.
-              </p>
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInLeft} className="space-y-8">
+              {/* Founder Card */}
+              <div className="glass-card p-8">
+                <div className="flex items-center gap-5 mb-6">
+                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-3xl font-bold text-white shrink-0">
+                    PS
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-foreground">Pankaj Shinde</h3>
+                    <p className="text-primary font-medium text-sm">Founder & Developer</p>
+                  </div>
+                </div>
+                <p className="text-muted-foreground text-base leading-relaxed mb-4">
+                  Pankaj Shinde is the creator of the Cloud Cost Anomaly Detection & Optimization System. He is passionate about developing modern cloud solutions that help organizations analyze cloud usage, detect cost anomalies, and optimize resources effectively.
+                </p>
+                <p className="text-muted-foreground text-base leading-relaxed">
+                  Through this platform, he aims to provide businesses with a powerful yet simple tool to monitor cloud expenses and improve cost efficiency.
+                </p>
+              </div>
             </motion.div>
 
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInRight} className="space-y-8">
@@ -512,14 +521,13 @@ const LandingPage = () => {
                   <h3 className="text-xl font-bold text-foreground">Our Mission</h3>
                 </div>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                  Our mission is to help organizations gain better visibility and control over their cloud spending by providing intelligent tools for cost monitoring, anomaly detection, and optimization.
+                  To help organizations gain better visibility and control over their cloud spending by providing intelligent tools for cost monitoring, anomaly detection, and optimization.
                 </p>
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   We aim to simplify cloud cost management and support businesses in making data-driven decisions.
                 </p>
               </div>
 
-              {/* Feature checklist */}
               <div className="grid sm:grid-cols-2 gap-3">
                 {[
                   "Multi-cloud cost aggregation",
