@@ -1,8 +1,11 @@
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { mockCloudAccounts } from "@/lib/mockData";
-import { Cloud, Plus, CheckCircle, RefreshCw, Sparkles, Link2, Shield } from "lucide-react";
+import { Plus, CheckCircle, RefreshCw, Sparkles, Link2, Shield } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import logoAws from "@/assets/logo-aws.png";
+import logoGcp from "@/assets/logo-gcp.png";
+import logoAzure from "@/assets/logo-azure.png";
 
 const CloudAccountsPage = () => {
   const [showForm, setShowForm] = useState(false);
@@ -94,7 +97,11 @@ const CloudAccountsPage = () => {
                 <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${
                   account.provider === "AWS" ? "bg-primary/10 ring-1 ring-primary/20" : "bg-[hsl(var(--cyan))]/10 ring-1 ring-[hsl(var(--cyan))]/20"
                 }`}>
-                  <Cloud className={`w-5 h-5 ${account.provider === "AWS" ? "text-primary" : "text-[hsl(var(--cyan))]"}`} />
+                  <img 
+                    src={account.provider === "AWS" ? logoAws : logoGcp} 
+                    alt={account.provider} 
+                    className="w-7 h-7 object-contain" 
+                  />
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-foreground">{account.name}</h3>

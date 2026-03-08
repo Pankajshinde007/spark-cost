@@ -15,6 +15,19 @@ import dashboardPreview from "@/assets/dashboard-preview.png";
 import avatarSarah from "@/assets/avatar-sarah.png";
 import avatarMarcus from "@/assets/avatar-marcus.png";
 import avatarPriya from "@/assets/avatar-priya.png";
+import logoAws from "@/assets/logo-aws.png";
+import logoAzure from "@/assets/logo-azure.png";
+import logoGcp from "@/assets/logo-gcp.png";
+import logoKubernetes from "@/assets/logo-kubernetes.png";
+import logoTerraform from "@/assets/logo-terraform.png";
+
+const cloudLogos: Record<string, string> = {
+  "Amazon Web Services": logoAws,
+  "Google Cloud": logoGcp,
+  "Microsoft Azure": logoAzure,
+  "Kubernetes": logoKubernetes,
+  "Terraform": logoTerraform,
+};
 
 /* ─── animation variants ─── */
 const fadeUp = {
@@ -340,9 +353,12 @@ const LandingPage = () => {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={scaleIn}
-                className="trusted-logo text-sm font-semibold text-muted-foreground hover:text-foreground transition-all duration-500 cursor-default"
+                className="flex flex-col items-center gap-2 group cursor-default"
               >
-                {name}
+                <div className="w-14 h-14 rounded-xl bg-white/5 border border-border/30 flex items-center justify-center group-hover:border-primary/40 transition-all duration-300 group-hover:bg-white/10">
+                  <img src={cloudLogos[name]} alt={name} className="w-9 h-9 object-contain" />
+                </div>
+                <span className="text-[10px] font-medium text-muted-foreground group-hover:text-foreground transition-colors">{name}</span>
               </motion.div>
             ))}
           </motion.div>
