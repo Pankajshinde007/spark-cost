@@ -66,6 +66,7 @@ const AdminPage = () => {
 
   const handleSaveSettings = () => {
     toast.success("Admin settings saved", { description: `Threshold: ${threshold}%, Alerts: ${alertsEnabled ? "On" : "Off"}` });
+    addLog("settings_change", `Updated settings — Threshold: ${threshold}%, Alerts: ${alertsEnabled ? "On" : "Off"}`);
   };
 
   const handleToggleRole = (userId: string) => {
