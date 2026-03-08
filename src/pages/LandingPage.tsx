@@ -162,11 +162,11 @@ const LandingPage = () => {
             <div className="flex items-center gap-2">
               <motion.div
                 whileHover={{ rotate: 10, scale: 1.1 }}
-                className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-[hsl(270,70%,55%)] flex items-center justify-center shadow-lg shadow-primary/20"
+                className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/25 neon-glow"
               >
-                <Cloud className="w-5 h-5 text-primary-foreground" />
+                <Zap className="w-5 h-5 text-primary-foreground" />
               </motion.div>
-              <span className="text-lg font-bold text-foreground">Cloud Cost <span className="gradient-text">ADOS</span></span>
+              <span className="text-lg font-bold text-foreground">Spark<span className="gradient-text">Cost</span></span>
             </div>
 
             <div className="hidden md:flex items-center gap-8">
@@ -212,8 +212,8 @@ const LandingPage = () => {
       <section id="home" className="relative overflow-hidden min-h-[95vh] flex items-center">
         <div className="hero-glow -top-40 -left-40" />
         <div className="hero-glow-purple bottom-20 right-10" />
-        <div className="hero-glow bottom-0 right-0 opacity-50" />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-[hsl(270,70%,50%)]/5" />
+        <div className="hero-glow-cyan bottom-0 right-0 opacity-40" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
         <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(hsl(215 20% 25% / 0.25) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
         <motion.div style={{ opacity: heroOpacity, scale: heroScale }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10 w-full">
@@ -713,12 +713,12 @@ const LandingPage = () => {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-[hsl(270,70%,55%)] flex items-center justify-center">
-                  <Cloud className="w-5 h-5 text-primary-foreground" />
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center neon-glow">
+                  <Zap className="w-5 h-5 text-primary-foreground" />
                 </div>
-                <span className="text-lg font-bold text-foreground">Cloud Cost <span className="gradient-text">ADOS</span></span>
+                <span className="text-lg font-bold text-foreground">Spark<span className="gradient-text">Cost</span></span>
               </div>
-              <p className="text-sm text-muted-foreground">Cloud Cost Anomaly Detection & Optimization System for modern teams.</p>
+              <p className="text-sm text-muted-foreground">AI-powered Cloud Cost Anomaly Detection & Optimization for modern teams.</p>
               <div className="flex gap-3 mt-4">
                 {[Linkedin, Twitter].map((Icon, i) => (
                   <a key={i} href="#" className="w-9 h-9 rounded-xl bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-colors">
@@ -749,7 +749,7 @@ const LandingPage = () => {
           </div>
 
           <div className="border-t border-border/30 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Cloud Cost ADOS. All rights reserved.</p>
+            <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} SparkCost. All rights reserved.</p>
             <p className="text-xs text-muted-foreground">Built with ❤️ for cloud-native teams</p>
           </div>
         </div>
