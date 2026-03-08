@@ -61,6 +61,7 @@ const AdminPage = () => {
 
   const handleRunAnalysis = () => {
     toast.success("Cost analysis triggered", { description: "Analysis will complete in ~2 minutes" });
+    addLog("analysis", "Triggered manual cost analysis");
   };
 
   const handleSaveSettings = () => {
