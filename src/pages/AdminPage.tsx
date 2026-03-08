@@ -31,6 +31,30 @@ const AdminPage = () => {
     toast.success("Admin settings saved", { description: `Threshold: ${threshold}%, Alerts: ${alertsEnabled ? "On" : "Off"}` });
   };
 
+  const handleToggleRole = (userId: string) => {
+    setUsers(prev => prev.map(u => {
+      if (u.id === userId) {
+        const newRole = u.role === "admin" ? "user" as const : "admin" as const;
+        toast.success(`Role updated`, { description: `${u.name} is now ${newRole}` });
+        return { ...u, role: newRole };
+      }
+      return u;
+    }));
+    setActionMenuOpen(null);
+  };
+
+  const handleToggleStatus = (userId: string) => {
+    setUsers(prev => prev.map(u => {
+      if (u.id === userId) {
+        const newStatus = u.status === "active" ? "inactive" as const : "active" as const;
+        toast.success(`Account ${newStatus === "active" ? "enabled" : "disabled"}`, { description: u.name });
+        return { ...u, status: newStatus };
+      }
+      return u;
+    }));
+    setActionMenuOpen(null);
+  };
+
   return (
     <DashboardLayout>
       <div className="mb-6">
