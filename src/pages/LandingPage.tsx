@@ -537,21 +537,26 @@ const LandingPage = () => {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className="glass-card-hover p-8"
+                className="glass-card-hover p-8 flex flex-col justify-between"
               >
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(5)].map((_, j) => (
-                    <Sparkles key={j} className="w-3.5 h-3.5 text-[hsl(var(--warning))]" />
-                  ))}
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-6">"{t.quote}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-[hsl(270,70%,55%)] flex items-center justify-center text-xs font-bold text-primary-foreground">
-                    {t.avatar}
+                <div>
+                  <div className="flex items-center gap-1 mb-4">
+                    {[...Array(5)].map((_, j) => (
+                      <Sparkles key={j} className="w-3.5 h-3.5 text-[hsl(var(--warning))]" />
+                    ))}
                   </div>
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">{t.name}</p>
-                    <p className="text-xs text-muted-foreground">{t.role}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-6">"{t.quote}"</p>
+                </div>
+                <div>
+                  <div className="inline-block px-3 py-1 rounded-full bg-[hsl(var(--success))]/10 text-[hsl(var(--success))] text-xs font-medium mb-4">
+                    {t.saved}
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full object-cover border-2 border-primary/20" />
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">{t.name}</p>
+                      <p className="text-xs text-muted-foreground">{t.role}</p>
+                    </div>
                   </div>
                 </div>
               </motion.div>
