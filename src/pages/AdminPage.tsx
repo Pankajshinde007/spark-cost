@@ -1,7 +1,7 @@
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { mockUsers, mockAlerts, mockCloudAccounts, mockAnomalies } from "@/lib/mockData";
-import { Users, Shield, Cloud, AlertTriangle, Activity, Bell, BellOff, Gauge, RefreshCw } from "lucide-react";
-import { motion } from "framer-motion";
+import { Users, Shield, Cloud, AlertTriangle, Activity, Bell, BellOff, Gauge, RefreshCw, ChevronDown, UserX, UserCheck, ShieldCheck, ShieldOff } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { toast } from "sonner";
@@ -15,11 +15,22 @@ const usageData = [
   { month: "Mar", cost: 47832 },
 ];
 
+interface UserData {
+  id: string;
+  name: string;
+  email: string;
+  role: "admin" | "user";
+  lastLogin: string;
+  status: "active" | "inactive";
+}
+
 const AdminPage = () => {
   const [threshold, setThreshold] = useState(30);
   const [alertsEnabled, setAlertsEnabled] = useState(true);
   const [emailAlerts, setEmailAlerts] = useState(true);
   const [slackAlerts, setSlackAlerts] = useState(false);
+  const [users, setUsers] = useState<UserData[]>(mockUsers.map(u => ({ ...u })));
+  const [actionMenuOpen, setActionMenuOpen] = useState<string | null>(null);
 
   const handleRunAnalysis = () => {
     toast.success("Cost analysis triggered", { description: "Analysis will complete in ~2 minutes" });
@@ -27,6 +38,30 @@ const AdminPage = () => {
 
   const handleSaveSettings = () => {
     toast.success("Admin settings saved", { description: `Threshold: ${threshold}%, Alerts: ${alertsEnabled ? "On" : "Off"}` });
+  };
+
+  const handleToggleRole = (userId: string) => {
+    setUsers(prev => prev.map(u => {
+      if (u.id === userId) {
+        const newRole = u.role === "admin" ? "user" as const : "admin" as const;
+        toast.success(`Role updated`, { description: `${u.name} is now ${newRole}` });
+        return { ...u, role: newRole };
+      }
+      return u;
+    }));
+    setActionMenuOpen(null);
+  };
+
+  const handleToggleStatus = (userId: string) => {
+    setUsers(prev => prev.map(u => {
+      if (u.id === userId) {
+        const newStatus = u.status === "active" ? "inactive" as const : "active" as const;
+        toast.success(`Account ${newStatus === "active" ? "enabled" : "disabled"}`, { description: u.name });
+        return { ...u, status: newStatus };
+      }
+      return u;
+    }));
+    setActionMenuOpen(null);
   };
 
   return (
@@ -66,11 +101,12 @@ const AdminPage = () => {
                   <th className="text-left py-2 font-medium">Role</th>
                   <th className="text-left py-2 font-medium">Status</th>
                   <th className="text-left py-2 font-medium">Last Login</th>
+                  <th className="text-right py-2 font-medium">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {mockUsers.map(u => (
-                  <tr key={u.id} className="border-b border-border/50">
+                {users.map(u => (
+                  <tr key={u.id} className="border-b border-border/50 group">
                     <td className="py-2.5">
                       <p className="text-foreground font-medium">{u.name}</p>
                       <p className="text-[10px] text-muted-foreground">{u.email}</p>
@@ -86,6 +122,46 @@ const AdminPage = () => {
                       }`}>{u.status}</span>
                     </td>
                     <td className="py-2.5 text-muted-foreground">{new Date(u.lastLogin).toLocaleDateString()}</td>
+                    <td className="py-2.5 text-right relative">
+                      <button
+                        onClick={() => setActionMenuOpen(actionMenuOpen === u.id ? null : u.id)}
+                        className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[10px] font-medium text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+                      >
+                        Manage <ChevronDown className="w-3 h-3" />
+                      </button>
+                      <AnimatePresence>
+                        {actionMenuOpen === u.id && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -5, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -5, scale: 0.95 }}
+                            transition={{ duration: 0.15 }}
+                            className="absolute right-0 top-full mt-1 z-20 w-48 glass-card shadow-xl p-1.5 space-y-0.5"
+                          >
+                            <button
+                              onClick={() => handleToggleRole(u.id)}
+                              className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-xs text-foreground hover:bg-secondary transition-colors text-left"
+                            >
+                              {u.role === "admin" ? (
+                                <><ShieldOff className="w-3.5 h-3.5 text-muted-foreground" /> Demote to User</>
+                              ) : (
+                                <><ShieldCheck className="w-3.5 h-3.5 text-primary" /> Promote to Admin</>
+                              )}
+                            </button>
+                            <button
+                              onClick={() => handleToggleStatus(u.id)}
+                              className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-xs hover:bg-secondary transition-colors text-left"
+                            >
+                              {u.status === "active" ? (
+                                <><UserX className="w-3.5 h-3.5 text-destructive" /> <span className="text-destructive">Disable Account</span></>
+                              ) : (
+                                <><UserCheck className="w-3.5 h-3.5 text-[hsl(var(--success))]" /> <span className="text-[hsl(var(--success))]">Enable Account</span></>
+                              )}
+                            </button>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </td>
                   </tr>
                 ))}
               </tbody>
