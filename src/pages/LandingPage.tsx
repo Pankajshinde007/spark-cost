@@ -46,16 +46,16 @@ const features = [
 
 const faqs = [
   {
-    q: "How does Pankaj detect abnormal cloud spending?",
-    a: "Pankaj uses machine learning models trained on your historical billing data to establish baseline spending patterns. When actual costs deviate significantly from expected values, the system flags them as anomalies and alerts your team.",
+    q: "How does the platform detect abnormal cloud spending?",
+    a: "Our platform uses machine learning models trained on your historical billing data to establish baseline spending patterns. When actual costs deviate significantly from expected values, the system flags them as anomalies and alerts your team.",
   },
   {
-    q: "Which cloud platforms does Pankaj support?",
-    a: "Pankaj currently supports Amazon Web Services (AWS) and Google Cloud Platform (GCP). We continuously work on adding more cloud providers.",
+    q: "Which cloud platforms are supported?",
+    a: "The cloud cost monitoring system currently supports Amazon Web Services (AWS) and Google Cloud Platform (GCP). We continuously work on adding more cloud providers.",
   },
   {
     q: "How do I connect my cloud accounts?",
-    a: "Simply provide your cloud account credentials or API keys through our secure onboarding process. Pankaj uses read-only access to fetch billing data without modifying your infrastructure.",
+    a: "Simply provide your cloud account credentials or API keys through our secure onboarding process. The platform uses read-only access to fetch billing data without modifying your infrastructure.",
   },
   {
     q: "What happens after a cost anomaly is detected?",
