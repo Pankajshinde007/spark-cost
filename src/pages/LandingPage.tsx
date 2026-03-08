@@ -148,26 +148,37 @@ const LandingPage = () => {
       </nav>
 
       {/* Hero */}
-      <section id="home" className="relative overflow-hidden">
+      <section id="home" className="relative overflow-hidden min-h-[90vh] flex items-center">
+        <div className="hero-glow -top-40 -left-40" />
+        <div className="hero-glow bottom-0 right-0" />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+        <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(hsl(215 20% 25% / 0.3) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              <p className="text-sm font-medium text-primary mb-4 tracking-wide uppercase">Cloud Cost Monitoring</p>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-medium mb-6 pulse-glow">
+                <Activity className="w-3 h-3" />
+                Cloud Cost Monitoring — Live
+              </div>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] text-foreground">
                 Stop overspending on cloud.{" "}
                 <span className="gradient-text">Start optimizing today.</span>
               </h1>
               <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-lg">
-                Pankaj automatically analyzes your AWS and Google Cloud billing data to detect cost spikes, anomalies, and optimization opportunities.
+                Automatically analyzes your AWS and Google Cloud billing data to detect cost spikes, anomalies, and optimization opportunities.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <Button size="lg" onClick={() => navigate("/login")} className="px-8">
+                <Button size="lg" onClick={() => navigate("/login")} className="px-8 shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-shadow">
                   <Zap className="w-4 h-4 mr-2" /> Start Monitoring
                 </Button>
-                <Button size="lg" variant="outline" onClick={() => scrollTo("features")} className="px-8">
+                <Button size="lg" variant="outline" onClick={() => scrollTo("features")} className="px-8 border-border/50 hover:border-primary/50">
                   See How It Works
                 </Button>
+              </div>
+              <div className="mt-10 flex items-center gap-6 text-xs text-muted-foreground">
+                <span className="flex items-center gap-1.5"><Shield className="w-3.5 h-3.5 text-[hsl(var(--success))]" /> SOC 2 Compliant</span>
+                <span className="flex items-center gap-1.5"><Cloud className="w-3.5 h-3.5 text-primary" /> Multi-cloud</span>
+                <span className="flex items-center gap-1.5"><Activity className="w-3.5 h-3.5 text-[hsl(var(--warning))]" /> Real-time</span>
               </div>
             </motion.div>
 
@@ -177,18 +188,18 @@ const LandingPage = () => {
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeUp}
-              className="relative"
+              className="relative floating"
             >
-              <div className="rounded-xl overflow-hidden border border-border/50 shadow-2xl shadow-primary/5">
+              <div className="rounded-2xl overflow-hidden border border-border/50 shadow-2xl shadow-primary/10 gradient-border">
                 <img
                   src={dashboardPreview}
-                  alt="Pankaj cloud cost monitoring dashboard showing cost charts and anomaly alerts"
+                  alt="Cloud cost monitoring dashboard showing cost charts and anomaly alerts"
                   className="w-full"
                   loading="lazy"
                 />
               </div>
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-3xl" />
+              <div className="absolute -bottom-6 -left-6 w-40 h-40 bg-primary/10 rounded-full blur-3xl" />
+              <div className="absolute -top-6 -right-6 w-32 h-32 bg-[hsl(270,70%,60%)] opacity-10 rounded-full blur-3xl" />
             </motion.div>
           </div>
         </div>
@@ -214,9 +225,9 @@ const LandingPage = () => {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className="glass-card p-8 hover:glow-primary transition-all duration-300 group"
+                className="glass-card-hover p-8 group"
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors group-hover:scale-110 duration-300">
                   <f.icon className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">{f.title}</h3>
@@ -252,9 +263,9 @@ const LandingPage = () => {
                   whileInView="visible"
                   viewport={{ once: true }}
                   variants={fadeUp}
-                  className="glass-card p-6 text-center"
+                  className="glass-card-hover p-6 text-center"
                 >
-                  <p className="text-4xl sm:text-5xl font-bold text-foreground">{s.value}</p>
+                  <p className="text-4xl sm:text-5xl font-bold gradient-text">{s.value}</p>
                   <p className="text-sm text-muted-foreground mt-2">{s.label}</p>
                 </motion.div>
               ))}

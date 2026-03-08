@@ -70,7 +70,17 @@
 
 @layer utilities {
   .glass-card {
-    @apply bg-card/80 backdrop-blur-sm border border-border/50 rounded-lg;
+    @apply bg-card/80 backdrop-blur-sm border border-border/50 rounded-xl;
+    background: linear-gradient(135deg, hsl(222 47% 9% / 0.9), hsl(222 47% 12% / 0.6));
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-500;
+  }
+  .glass-card-hover:hover {
+    border-color: hsl(213 94% 56% / 0.4);
+    box-shadow: 0 0 30px hsl(213 94% 56% / 0.1), 0 8px 32px hsl(0 0% 0% / 0.3);
+    transform: translateY(-4px);
   }
 
   .glow-primary {
@@ -78,7 +88,35 @@
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[hsl(213,94%,56%)] to-[hsl(270,70%,60%)];
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(213 94% 66%), hsl(270 70% 65%), hsl(213 94% 56%));
+  }
+
+  .gradient-border {
+    position: relative;
+  }
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, hsl(213 94% 56% / 0.5), hsl(270 70% 60% / 0.3), transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, hsl(213 94% 56% / 0.12), transparent 70%);
+    filter: blur(80px);
+    pointer-events: none;
   }
 
   .stat-card {
@@ -95,5 +133,23 @@
 
   .anomaly-low {
     @apply text-[hsl(var(--success))];
+  }
+
+  .floating {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .pulse-glow {
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 20px hsl(213 94% 56% / 0.1); }
+    50% { box-shadow: 0 0 40px hsl(213 94% 56% / 0.25); }
   }
 }
