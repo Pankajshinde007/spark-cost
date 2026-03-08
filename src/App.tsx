@@ -13,6 +13,7 @@ import RecommendationsPage from "./pages/RecommendationsPage";
 import CloudAccountsPage from "./pages/CloudAccountsPage";
 import AdminPage from "./pages/AdminPage";
 import AdminLoginPage from "./pages/AdminLoginPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import SettingsPage from "./pages/SettingsPage";
 import NotFound from "./pages/NotFound";
 import { ReactNode } from "react";
