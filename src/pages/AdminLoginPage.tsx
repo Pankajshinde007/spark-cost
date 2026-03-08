@@ -96,6 +96,11 @@ const AdminLoginPage = () => {
                 </button>
               </div>
             </div>
+            <div className="flex justify-end mt-1">
+              <Link to="/forgot-password?type=admin" className="text-xs text-muted-foreground hover:text-destructive transition-colors">
+                Forgot password?
+              </Link>
+            </div>
 
             {error && (
               <motion.p

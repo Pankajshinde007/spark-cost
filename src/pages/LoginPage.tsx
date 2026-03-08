@@ -78,6 +78,11 @@ const LoginPage = () => {
                 </button>
               </div>
             </div>
+            <div className="flex justify-end mt-1">
+              <Link to="/forgot-password" className="text-xs text-muted-foreground hover:text-primary transition-colors">
+                Forgot password?
+              </Link>
+            </div>
 
             {error && <p className="text-sm text-destructive">{error}</p>}
 
