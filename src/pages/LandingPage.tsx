@@ -88,7 +88,7 @@ const LandingPage = () => {
               <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
                 <Cloud className="w-5 h-5 text-primary-foreground" />
               </div>
-              <span className="text-lg font-bold text-foreground">SparkCost</span>
+              <span className="text-lg font-bold text-foreground">Cloud Cost ADOS</span>
             </div>
 
             {/* Desktop menu */}
@@ -212,7 +212,7 @@ const LandingPage = () => {
             <p className="text-sm font-medium text-primary mb-3 tracking-wide uppercase">Core capabilities</p>
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground">Real-time visibility into your cloud spend</h2>
             <p className="mt-4 text-muted-foreground text-lg">
-              SparkCost automatically collects your AWS and Google Cloud billing data, then uses machine learning to spot cost anomalies and recommend immediate savings.
+              The platform automatically collects your AWS and Google Cloud billing data, then uses machine learning to spot cost anomalies and recommend immediate savings.
             </p>
           </motion.div>
 
@@ -246,7 +246,7 @@ const LandingPage = () => {
               <p className="text-sm font-medium text-primary mb-3 tracking-wide uppercase">Real Results</p>
               <h2 className="text-3xl sm:text-4xl font-bold text-foreground">See the impact of smarter cloud spending</h2>
               <p className="mt-4 text-muted-foreground text-lg">
-                Organizations using SparkCost's monitoring system detect cost anomalies faster and cut unnecessary cloud expenses through automated analysis and clear, actionable recommendations.
+                Organizations using our monitoring system detect cost anomalies faster and cut unnecessary cloud expenses through automated analysis and clear, actionable recommendations.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Button size="lg" onClick={() => navigate("/login")}>Start optimizing today</Button>
@@ -280,7 +280,7 @@ const LandingPage = () => {
           <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground">Powerful dashboard at your fingertips</h2>
             <p className="mt-4 text-muted-foreground text-lg">
-              SparkCost automatically collects cloud billing data and highlights cost issues before they become expensive problems.
+              The platform automatically collects cloud billing data and highlights cost issues before they become expensive problems.
             </p>
           </motion.div>
 
@@ -288,7 +288,7 @@ const LandingPage = () => {
             <div className="rounded-2xl overflow-hidden border border-border/50 shadow-2xl shadow-primary/10">
               <img
                 src={dashboardPreview}
-                alt="SparkCost dashboard showing cost monitoring charts, anomaly alerts, and cost breakdown"
+                alt="Cloud Cost ADOS dashboard showing cost monitoring charts, anomaly alerts, and cost breakdown"
                 className="w-full"
                 loading="lazy"
               />
@@ -400,10 +400,10 @@ const LandingPage = () => {
                 <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
                   <Cloud className="w-5 h-5 text-primary-foreground" />
                 </div>
-                <span className="text-lg font-bold text-foreground">SparkCost</span>
+                <span className="text-lg font-bold text-foreground">Cloud Cost ADOS</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                Cloud cost monitoring and optimization platform for modern teams.
+                Cloud Cost Anomaly Detection & Optimization System for modern teams.
               </p>
               <div className="flex gap-3 mt-4">
                 <a href="#" className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors">
@@ -440,7 +440,7 @@ const LandingPage = () => {
 
           <div className="border-t border-border/30 mt-10 pt-6 text-center">
             <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()} SparkCost. All rights reserved.
+              © {new Date().getFullYear()} Cloud Cost ADOS. All rights reserved.
             </p>
           </div>
         </div>
