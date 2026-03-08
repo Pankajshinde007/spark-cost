@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-import { Activity, Eye, EyeOff } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
+import { Activity, Eye, EyeOff, Shield } from "lucide-react";
 import { motion } from "framer-motion";
 
 const LoginPage = () => {
