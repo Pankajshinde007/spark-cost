@@ -5,8 +5,8 @@ import { Shield, Eye, EyeOff, Lock, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 
 const ADMIN_CREDENTIALS = {
-  email: "admin@sparkcost.com",
-  password: "admin123",
+  email: "pankjbs8298@gmail.com",
+  password: "1234",
 };
 
 const AdminLoginPage = () => {
