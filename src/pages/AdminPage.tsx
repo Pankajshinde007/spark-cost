@@ -20,6 +20,8 @@ const AdminPage = () => {
   const [alertsEnabled, setAlertsEnabled] = useState(true);
   const [emailAlerts, setEmailAlerts] = useState(true);
   const [slackAlerts, setSlackAlerts] = useState(false);
+  const [users, setUsers] = useState(mockUsers.map(u => ({ ...u })));
+  const [actionMenuOpen, setActionMenuOpen] = useState<string | null>(null);
 
   const handleRunAnalysis = () => {
     toast.success("Cost analysis triggered", { description: "Analysis will complete in ~2 minutes" });
