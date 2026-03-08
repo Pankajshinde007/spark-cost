@@ -15,12 +15,21 @@ const usageData = [
   { month: "Mar", cost: 47832 },
 ];
 
+interface UserData {
+  id: string;
+  name: string;
+  email: string;
+  role: "admin" | "user";
+  lastLogin: string;
+  status: "active" | "inactive";
+}
+
 const AdminPage = () => {
   const [threshold, setThreshold] = useState(30);
   const [alertsEnabled, setAlertsEnabled] = useState(true);
   const [emailAlerts, setEmailAlerts] = useState(true);
   const [slackAlerts, setSlackAlerts] = useState(false);
-  const [users, setUsers] = useState(mockUsers.map(u => ({ ...u })));
+  const [users, setUsers] = useState<UserData[]>(mockUsers.map(u => ({ ...u })));
   const [actionMenuOpen, setActionMenuOpen] = useState<string | null>(null);
 
   const handleRunAnalysis = () => {
