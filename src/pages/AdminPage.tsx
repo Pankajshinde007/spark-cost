@@ -1,6 +1,6 @@
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { mockUsers, mockAlerts, mockCloudAccounts, mockAnomalies } from "@/lib/mockData";
-import { Users, Shield, Cloud, AlertTriangle, Activity, Bell, BellOff, Gauge, RefreshCw, ChevronDown, UserX, UserCheck, ShieldCheck, ShieldOff } from "lucide-react";
+import { Users, Shield, Cloud, AlertTriangle, Activity, Bell, BellOff, Gauge, RefreshCw, ChevronDown, UserX, UserCheck, ShieldCheck, ShieldOff, Clock, History } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
@@ -24,6 +24,22 @@ interface UserData {
   status: "active" | "inactive";
 }
 
+interface ActivityLogEntry {
+  id: string;
+  action: "role_change" | "status_change" | "settings_change" | "analysis";
+  description: string;
+  user: string;
+  timestamp: Date;
+}
+
+const initialLogs: ActivityLogEntry[] = [
+  { id: "seed-1", action: "role_change", description: "Promoted Sarah Ops to admin", user: "John Admin", timestamp: new Date(Date.now() - 86400000 * 2) },
+  { id: "seed-2", action: "status_change", description: "Disabled account for Lisa Finance", user: "John Admin", timestamp: new Date(Date.now() - 86400000 * 3) },
+  { id: "seed-3", action: "settings_change", description: "Updated anomaly threshold to 25%", user: "John Admin", timestamp: new Date(Date.now() - 86400000 * 5) },
+  { id: "seed-4", action: "analysis", description: "Triggered manual cost analysis", user: "John Admin", timestamp: new Date(Date.now() - 86400000 * 6) },
+  { id: "seed-5", action: "status_change", description: "Enabled account for Mike Dev", user: "John Admin", timestamp: new Date(Date.now() - 86400000 * 7) },
+];
+
 const AdminPage = () => {
   const [threshold, setThreshold] = useState(30);
   const [alertsEnabled, setAlertsEnabled] = useState(true);
@@ -31,13 +47,26 @@ const AdminPage = () => {
   const [slackAlerts, setSlackAlerts] = useState(false);
   const [users, setUsers] = useState<UserData[]>(mockUsers.map(u => ({ ...u })));
   const [actionMenuOpen, setActionMenuOpen] = useState<string | null>(null);
+  const [activityLog, setActivityLog] = useState<ActivityLogEntry[]>(initialLogs);
+
+  const addLog = (action: ActivityLogEntry["action"], description: string) => {
+    setActivityLog(prev => [{
+      id: crypto.randomUUID(),
+      action,
+      description,
+      user: "John Admin",
+      timestamp: new Date(),
+    }, ...prev]);
+  };
 
   const handleRunAnalysis = () => {
     toast.success("Cost analysis triggered", { description: "Analysis will complete in ~2 minutes" });
+    addLog("analysis", "Triggered manual cost analysis");
   };
 
   const handleSaveSettings = () => {
     toast.success("Admin settings saved", { description: `Threshold: ${threshold}%, Alerts: ${alertsEnabled ? "On" : "Off"}` });
+    addLog("settings_change", `Updated settings — Threshold: ${threshold}%, Alerts: ${alertsEnabled ? "On" : "Off"}`);
   };
 
   const handleToggleRole = (userId: string) => {
@@ -45,6 +74,7 @@ const AdminPage = () => {
       if (u.id === userId) {
         const newRole = u.role === "admin" ? "user" as const : "admin" as const;
         toast.success(`Role updated`, { description: `${u.name} is now ${newRole}` });
+        addLog("role_change", `${u.role === "admin" ? "Demoted" : "Promoted"} ${u.name} to ${newRole}`);
         return { ...u, role: newRole };
       }
       return u;
@@ -57,6 +87,7 @@ const AdminPage = () => {
       if (u.id === userId) {
         const newStatus = u.status === "active" ? "inactive" as const : "active" as const;
         toast.success(`Account ${newStatus === "active" ? "enabled" : "disabled"}`, { description: u.name });
+        addLog("status_change", `${newStatus === "active" ? "Enabled" : "Disabled"} account for ${u.name}`);
         return { ...u, status: newStatus };
       }
       return u;
@@ -270,6 +301,64 @@ const AdminPage = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Activity Log */}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }} className="glass-card p-5 mt-6">
+        <h3 className="text-sm font-semibold text-foreground mb-4 flex items-center gap-2">
+          <History className="w-4 h-4 text-primary" /> Activity Log
+        </h3>
+        <div className="space-y-1 max-h-[320px] overflow-y-auto pr-1">
+          <AnimatePresence initial={false}>
+            {activityLog.map((entry) => {
+              const iconMap = {
+                role_change: <ShieldCheck className="w-3.5 h-3.5 text-primary" />,
+                status_change: <UserCheck className="w-3.5 h-3.5 text-[hsl(var(--warning))]" />,
+                settings_change: <Gauge className="w-3.5 h-3.5 text-[hsl(var(--success))]" />,
+                analysis: <RefreshCw className="w-3.5 h-3.5 text-muted-foreground" />,
+              };
+              const colorMap = {
+                role_change: "border-l-primary",
+                status_change: "border-l-[hsl(var(--warning))]",
+                settings_change: "border-l-[hsl(var(--success))]",
+                analysis: "border-l-muted-foreground",
+              };
+              const timeAgo = (date: Date) => {
+                const diff = Date.now() - date.getTime();
+                const mins = Math.floor(diff / 60000);
+                if (mins < 1) return "Just now";
+                if (mins < 60) return `${mins}m ago`;
+                const hrs = Math.floor(mins / 60);
+                if (hrs < 24) return `${hrs}h ago`;
+                const days = Math.floor(hrs / 24);
+                return `${days}d ago`;
+              };
+
+              return (
+                <motion.div
+                  key={entry.id}
+                  initial={{ opacity: 0, x: -10, height: 0 }}
+                  animate={{ opacity: 1, x: 0, height: "auto" }}
+                  exit={{ opacity: 0, x: 10, height: 0 }}
+                  transition={{ duration: 0.25 }}
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg bg-secondary/30 border-l-2 ${colorMap[entry.action]}`}
+                >
+                  <div className="w-7 h-7 rounded-lg bg-secondary flex items-center justify-center flex-shrink-0">
+                    {iconMap[entry.action]}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs text-foreground">{entry.description}</p>
+                    <p className="text-[10px] text-muted-foreground">by {entry.user}</p>
+                  </div>
+                  <div className="flex items-center gap-1 text-[10px] text-muted-foreground flex-shrink-0">
+                    <Clock className="w-3 h-3" />
+                    {timeAgo(entry.timestamp)}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+      </motion.div>
     </DashboardLayout>
   );
 };
