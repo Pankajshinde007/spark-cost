@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "@/hooks/useAuth";
+import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import AnomaliesPage from "./pages/AnomaliesPage";
@@ -36,6 +37,12 @@ const LoginRoute = () => {
   return <LoginPage />;
 };
 
+const PublicRoute = () => {
+  const { isAuthenticated } = useAuth();
+  if (isAuthenticated) return <Navigate to="/dashboard" replace />;
+  return <LandingPage />;
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -44,7 +51,8 @@ const App = () => (
       <BrowserRouter>
         <AuthProvider>
           <Routes>
-            <Route path="/" element={<LoginRoute />} />
+            <Route path="/" element={<PublicRoute />} />
+            <Route path="/login" element={<LoginRoute />} />
             <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
             <Route path="/cloud-accounts" element={<ProtectedRoute><CloudAccountsPage /></ProtectedRoute>} />
             <Route path="/anomalies" element={<ProtectedRoute><AnomaliesPage /></ProtectedRoute>} />
