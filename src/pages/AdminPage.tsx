@@ -301,6 +301,64 @@ const AdminPage = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Activity Log */}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }} className="glass-card p-5 mt-6">
+        <h3 className="text-sm font-semibold text-foreground mb-4 flex items-center gap-2">
+          <History className="w-4 h-4 text-primary" /> Activity Log
+        </h3>
+        <div className="space-y-1 max-h-[320px] overflow-y-auto pr-1">
+          <AnimatePresence initial={false}>
+            {activityLog.map((entry) => {
+              const iconMap = {
+                role_change: <ShieldCheck className="w-3.5 h-3.5 text-primary" />,
+                status_change: <UserCheck className="w-3.5 h-3.5 text-[hsl(var(--warning))]" />,
+                settings_change: <Gauge className="w-3.5 h-3.5 text-[hsl(var(--success))]" />,
+                analysis: <RefreshCw className="w-3.5 h-3.5 text-muted-foreground" />,
+              };
+              const colorMap = {
+                role_change: "border-l-primary",
+                status_change: "border-l-[hsl(var(--warning))]",
+                settings_change: "border-l-[hsl(var(--success))]",
+                analysis: "border-l-muted-foreground",
+              };
+              const timeAgo = (date: Date) => {
+                const diff = Date.now() - date.getTime();
+                const mins = Math.floor(diff / 60000);
+                if (mins < 1) return "Just now";
+                if (mins < 60) return `${mins}m ago`;
+                const hrs = Math.floor(mins / 60);
+                if (hrs < 24) return `${hrs}h ago`;
+                const days = Math.floor(hrs / 24);
+                return `${days}d ago`;
+              };
+
+              return (
+                <motion.div
+                  key={entry.id}
+                  initial={{ opacity: 0, x: -10, height: 0 }}
+                  animate={{ opacity: 1, x: 0, height: "auto" }}
+                  exit={{ opacity: 0, x: 10, height: 0 }}
+                  transition={{ duration: 0.25 }}
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg bg-secondary/30 border-l-2 ${colorMap[entry.action]}`}
+                >
+                  <div className="w-7 h-7 rounded-lg bg-secondary flex items-center justify-center flex-shrink-0">
+                    {iconMap[entry.action]}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs text-foreground">{entry.description}</p>
+                    <p className="text-[10px] text-muted-foreground">by {entry.user}</p>
+                  </div>
+                  <div className="flex items-center gap-1 text-[10px] text-muted-foreground flex-shrink-0">
+                    <Clock className="w-3 h-3" />
+                    {timeAgo(entry.timestamp)}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+      </motion.div>
     </DashboardLayout>
   );
 };
