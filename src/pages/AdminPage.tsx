@@ -1,6 +1,6 @@
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { mockUsers, mockAlerts, mockCloudAccounts, mockAnomalies } from "@/lib/mockData";
-import { Users, Shield, Cloud, AlertTriangle, Activity, Bell, BellOff, Gauge, RefreshCw, ChevronDown, UserX, UserCheck, ShieldCheck, ShieldOff } from "lucide-react";
+import { Users, Shield, Cloud, AlertTriangle, Activity, Bell, BellOff, Gauge, RefreshCw, ChevronDown, UserX, UserCheck, ShieldCheck, ShieldOff, Clock, History } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
