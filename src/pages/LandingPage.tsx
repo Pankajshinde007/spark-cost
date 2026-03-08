@@ -713,12 +713,12 @@ const LandingPage = () => {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-[hsl(270,70%,55%)] flex items-center justify-center">
-                  <Cloud className="w-5 h-5 text-primary-foreground" />
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center neon-glow">
+                  <Zap className="w-5 h-5 text-primary-foreground" />
                 </div>
-                <span className="text-lg font-bold text-foreground">Cloud Cost <span className="gradient-text">ADOS</span></span>
+                <span className="text-lg font-bold text-foreground">Spark<span className="gradient-text">Cost</span></span>
               </div>
-              <p className="text-sm text-muted-foreground">Cloud Cost Anomaly Detection & Optimization System for modern teams.</p>
+              <p className="text-sm text-muted-foreground">AI-powered Cloud Cost Anomaly Detection & Optimization for modern teams.</p>
               <div className="flex gap-3 mt-4">
                 {[Linkedin, Twitter].map((Icon, i) => (
                   <a key={i} href="#" className="w-9 h-9 rounded-xl bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-colors">
