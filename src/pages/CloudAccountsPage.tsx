@@ -1,8 +1,11 @@
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { mockCloudAccounts } from "@/lib/mockData";
-import { Cloud, Plus, CheckCircle, RefreshCw, Sparkles, Link2, Shield } from "lucide-react";
+import { Plus, CheckCircle, RefreshCw, Sparkles, Link2, Shield } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import logoAws from "@/assets/logo-aws.png";
+import logoGcp from "@/assets/logo-gcp.png";
+import logoAzure from "@/assets/logo-azure.png";
 
 const CloudAccountsPage = () => {
   const [showForm, setShowForm] = useState(false);
