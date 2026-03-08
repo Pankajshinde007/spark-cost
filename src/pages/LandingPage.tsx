@@ -83,9 +83,9 @@ const howItWorks = [
 ];
 
 const testimonials = [
-  { name: "Sarah Chen", role: "CTO, TechScale", quote: "Detected a $12K/month anomaly in our first week. This tool pays for itself.", avatar: "SC" },
-  { name: "Marcus Rivera", role: "DevOps Lead, CloudNine", quote: "The real-time alerts have saved us from 3 billing incidents already.", avatar: "MR" },
-  { name: "Priya Sharma", role: "VP Engineering, DataFlow", quote: "Best cloud cost tool we've used. Simple setup, powerful insights.", avatar: "PS" },
+  { name: "Sarah Chen", role: "CTO, TechScale Inc.", quote: "We detected a $12K/month anomaly in our AWS account within the first week. The AI flagged an unused RDS cluster that no one noticed. This tool literally pays for itself.", avatar: avatarSarah, saved: "$48K/year saved" },
+  { name: "Marcus Rivera", role: "DevOps Lead, CloudNine Systems", quote: "The real-time Slack alerts have saved us from 3 critical billing incidents. Last month it caught a misconfigured auto-scaling group before it cost us thousands.", avatar: avatarMarcus, saved: "$23K/year saved" },
+  { name: "Priya Sharma", role: "VP Engineering, DataFlow AI", quote: "Best cloud cost tool we've used. Connected both AWS and GCP in under 5 minutes. The optimization recommendations alone cut our monthly bill by 30%.", avatar: avatarPriya, saved: "$67K/year saved" },
 ];
 
 const faqs = [
