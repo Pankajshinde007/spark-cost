@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 const navItems = [
   { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { path: "/cloud-accounts", label: "Cloud Accounts", icon: Cloud },
+  { path: "/anomalies", label: "Anomalies", icon: Activity },
   { path: "/alerts", label: "Alerts", icon: AlertTriangle },
   { path: "/recommendations", label: "Optimization", icon: Lightbulb },
   { path: "/settings", label: "Settings", icon: Settings },
