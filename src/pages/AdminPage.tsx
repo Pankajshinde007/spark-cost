@@ -24,6 +24,22 @@ interface UserData {
   status: "active" | "inactive";
 }
 
+interface ActivityLogEntry {
+  id: string;
+  action: "role_change" | "status_change" | "settings_change" | "analysis";
+  description: string;
+  user: string;
+  timestamp: Date;
+}
+
+const initialLogs: ActivityLogEntry[] = [
+  { id: "seed-1", action: "role_change", description: "Promoted Sarah Ops to admin", user: "John Admin", timestamp: new Date(Date.now() - 86400000 * 2) },
+  { id: "seed-2", action: "status_change", description: "Disabled account for Lisa Finance", user: "John Admin", timestamp: new Date(Date.now() - 86400000 * 3) },
+  { id: "seed-3", action: "settings_change", description: "Updated anomaly threshold to 25%", user: "John Admin", timestamp: new Date(Date.now() - 86400000 * 5) },
+  { id: "seed-4", action: "analysis", description: "Triggered manual cost analysis", user: "John Admin", timestamp: new Date(Date.now() - 86400000 * 6) },
+  { id: "seed-5", action: "status_change", description: "Enabled account for Mike Dev", user: "John Admin", timestamp: new Date(Date.now() - 86400000 * 7) },
+];
+
 const AdminPage = () => {
   const [threshold, setThreshold] = useState(30);
   const [alertsEnabled, setAlertsEnabled] = useState(true);
@@ -31,6 +47,17 @@ const AdminPage = () => {
   const [slackAlerts, setSlackAlerts] = useState(false);
   const [users, setUsers] = useState<UserData[]>(mockUsers.map(u => ({ ...u })));
   const [actionMenuOpen, setActionMenuOpen] = useState<string | null>(null);
+  const [activityLog, setActivityLog] = useState<ActivityLogEntry[]>(initialLogs);
+
+  const addLog = (action: ActivityLogEntry["action"], description: string) => {
+    setActivityLog(prev => [{
+      id: crypto.randomUUID(),
+      action,
+      description,
+      user: "John Admin",
+      timestamp: new Date(),
+    }, ...prev]);
+  };
 
   const handleRunAnalysis = () => {
     toast.success("Cost analysis triggered", { description: "Analysis will complete in ~2 minutes" });
