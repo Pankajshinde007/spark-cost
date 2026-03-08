@@ -353,9 +353,12 @@ const LandingPage = () => {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={scaleIn}
-                className="trusted-logo text-sm font-semibold text-muted-foreground hover:text-foreground transition-all duration-500 cursor-default"
+                className="flex flex-col items-center gap-2 group cursor-default"
               >
-                {name}
+                <div className="w-14 h-14 rounded-xl bg-white/5 border border-border/30 flex items-center justify-center group-hover:border-primary/40 transition-all duration-300 group-hover:bg-white/10">
+                  <img src={cloudLogos[name]} alt={name} className="w-9 h-9 object-contain" />
+                </div>
+                <span className="text-[10px] font-medium text-muted-foreground group-hover:text-foreground transition-colors">{name}</span>
               </motion.div>
             ))}
           </motion.div>
