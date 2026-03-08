@@ -54,6 +54,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<PublicRoute />} />
             <Route path="/login" element={<LoginRoute />} />
+            <Route path="/admin-login" element={<AdminLoginPage />} />
             <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
             <Route path="/cloud-accounts" element={<ProtectedRoute><CloudAccountsPage /></ProtectedRoute>} />
             <Route path="/anomalies" element={<ProtectedRoute><AnomaliesPage /></ProtectedRoute>} />

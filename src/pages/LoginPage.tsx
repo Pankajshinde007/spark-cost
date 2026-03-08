@@ -89,9 +89,12 @@ const LoginPage = () => {
             </button>
           </form>
 
-          <p className="text-xs text-muted-foreground mt-6 text-center">
-            Use any email with "admin" for admin role, otherwise user role.
-          </p>
+          <div className="flex items-center justify-center gap-1.5 mt-6">
+            <Shield className="w-3.5 h-3.5 text-muted-foreground" />
+            <Link to="/admin-login" className="text-xs text-muted-foreground hover:text-primary transition-colors">
+              Admin Login
+            </Link>
+          </div>
         </div>
       </motion.div>
     </div>
