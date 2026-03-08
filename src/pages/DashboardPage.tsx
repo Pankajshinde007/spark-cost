@@ -62,7 +62,8 @@ const DashboardPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
         {/* Cost Trend */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="glass-card p-5 lg:col-span-2">
-          <h3 className="text-sm font-semibold text-foreground mb-4">Daily Cost Trend</h3>
+          <h3 className="text-sm font-semibold text-foreground mb-1">Daily Cost Trend</h3>
+          <p className="text-[10px] text-muted-foreground mb-4">Last 30 days — real-time AWS & GCP spending</p>
           <ResponsiveContainer width="100%" height={260}>
             <AreaChart data={mockCostData.dailyCosts}>
               <defs>
@@ -76,7 +77,7 @@ const DashboardPage = () => {
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(222, 30%, 18%)" />
-              <XAxis dataKey="date" tick={{ fontSize: 11, fill: "hsl(215, 20%, 55%)" }} />
+              <XAxis dataKey="date" tick={{ fontSize: 10, fill: "hsl(215, 20%, 55%)" }} interval={4} angle={-30} textAnchor="end" height={45} />
               <YAxis tick={{ fontSize: 11, fill: "hsl(215, 20%, 55%)" }} tickFormatter={(v) => `$${v}`} />
               <Tooltip
                 contentStyle={{

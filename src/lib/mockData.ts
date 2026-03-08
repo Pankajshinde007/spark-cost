@@ -1,22 +1,44 @@
+import { format, subDays } from "date-fns";
+
+// Generate 30 days of realistic cost data with real dates
+const generateDailyCosts = () => {
+  const today = new Date();
+  const baseCosts = { aws: 1300, gcp: 890 };
+  const data = [];
+
+  for (let i = 29; i >= 0; i--) {
+    const date = subDays(today, i);
+    const dayOfWeek = date.getDay();
+    // Lower costs on weekends
+    const weekendFactor = dayOfWeek === 0 || dayOfWeek === 6 ? 0.7 : 1;
+    // Random daily variation ±15%
+    const awsVariation = 1 + (Math.sin(i * 0.8) * 0.12 + (Math.random() - 0.5) * 0.1);
+    const gcpVariation = 1 + (Math.sin(i * 0.6 + 1) * 0.1 + (Math.random() - 0.5) * 0.08);
+
+    let aws = Math.round(baseCosts.aws * weekendFactor * awsVariation);
+    let gcp = Math.round(baseCosts.gcp * weekendFactor * gcpVariation);
+
+    // Inject anomaly spikes on specific days
+    if (i === 23) aws = 3850; // spike ~week 1
+    if (i === 9) { aws = 4200; gcp = 3100; } // spike ~week 3
+
+    data.push({
+      date: format(date, "MMM d"),
+      fullDate: format(date, "yyyy-MM-dd"),
+      aws,
+      gcp,
+      total: aws + gcp,
+    });
+  }
+  return data;
+};
+
+const dailyCosts = generateDailyCosts();
+
 export const mockCostData = {
-  totalCost: 47832.56,
+  totalCost: dailyCosts.reduce((sum, d) => sum + d.total, 0),
   previousMonthCost: 42150.30,
-  dailyCosts: [
-    { date: "Mar 1", aws: 1250, gcp: 890, total: 2140 },
-    { date: "Mar 2", aws: 1180, gcp: 920, total: 2100 },
-    { date: "Mar 3", aws: 1320, gcp: 870, total: 2190 },
-    { date: "Mar 4", aws: 1400, gcp: 910, total: 2310 },
-    { date: "Mar 5", aws: 1290, gcp: 880, total: 2170 },
-    { date: "Mar 6", aws: 3850, gcp: 920, total: 4770 },
-    { date: "Mar 7", aws: 1350, gcp: 890, total: 2240 },
-    { date: "Mar 8", aws: 1280, gcp: 940, total: 2220 },
-    { date: "Mar 9", aws: 1310, gcp: 870, total: 2180 },
-    { date: "Mar 10", aws: 1420, gcp: 900, total: 2320 },
-    { date: "Mar 11", aws: 1190, gcp: 850, total: 2040 },
-    { date: "Mar 12", aws: 1360, gcp: 910, total: 2270 },
-    { date: "Mar 13", aws: 1280, gcp: 880, total: 2160 },
-    { date: "Mar 14", aws: 4200, gcp: 3100, total: 7300 },
-  ],
+  dailyCosts,
   serviceBreakdown: [
     { name: "EC2 / Compute", cost: 18500, percentage: 38.7 },
     { name: "S3 / Storage", cost: 8200, percentage: 17.1 },
