@@ -162,11 +162,11 @@ const LandingPage = () => {
             <div className="flex items-center gap-2">
               <motion.div
                 whileHover={{ rotate: 10, scale: 1.1 }}
-                className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-[hsl(270,70%,55%)] flex items-center justify-center shadow-lg shadow-primary/20"
+                className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/20"
               >
-                <Cloud className="w-5 h-5 text-primary-foreground" />
+                <Zap className="w-5 h-5 text-primary-foreground" />
               </motion.div>
-              <span className="text-lg font-bold text-foreground">Cloud Cost <span className="gradient-text">ADOS</span></span>
+              <span className="text-lg font-bold text-foreground">Spark<span className="gradient-text">Cost</span></span>
             </div>
 
             <div className="hidden md:flex items-center gap-8">
