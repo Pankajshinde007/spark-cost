@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     // Mock authentication
     const isAdmin = email.toLowerCase().includes("admin");
     setUser({
-      name: isAdmin ? "John Admin" : "Sarah Ops",
+      name: isAdmin ? "Pankaj Shinde" : "Sarah Ops",
       email,
       role: isAdmin ? "admin" : "user",
     });

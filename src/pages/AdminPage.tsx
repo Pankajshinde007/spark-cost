@@ -54,7 +54,7 @@ const AdminPage = () => {
       id: crypto.randomUUID(),
       action,
       description,
-      user: "John Admin",
+      user: "Pankaj Shinde",
       timestamp: new Date(),
     }, ...prev]);
   };

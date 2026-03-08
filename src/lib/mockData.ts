@@ -174,7 +174,7 @@ export const mockAnomalies = [
 ];
 
 export const mockUsers = [
-  { id: "1", name: "John Admin", email: "john@company.com", role: "admin" as const, lastLogin: "2026-03-07T08:00:00Z", status: "active" as const },
+  { id: "1", name: "Pankaj Shinde", email: "pankaj@company.com", role: "admin" as const, lastLogin: "2026-03-07T08:00:00Z", status: "active" as const },
   { id: "2", name: "Sarah Ops", email: "sarah@company.com", role: "user" as const, lastLogin: "2026-03-06T14:30:00Z", status: "active" as const },
   { id: "3", name: "Mike Dev", email: "mike@company.com", role: "user" as const, lastLogin: "2026-03-05T09:15:00Z", status: "active" as const },
   { id: "4", name: "Lisa Finance", email: "lisa@company.com", role: "user" as const, lastLogin: "2026-02-28T11:00:00Z", status: "inactive" as const },
