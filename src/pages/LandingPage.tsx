@@ -478,40 +478,72 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* ── Dashboard Preview ── */}
+      {/* ── About Us ── */}
       <section id="about" className="py-24 lg:py-32 section-divider">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-16">
+            <span className="inline-block text-xs font-semibold text-primary uppercase tracking-[0.15em] mb-4 px-4 py-1.5 rounded-full bg-primary/5 border border-primary/20">
+              About Us
+            </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
-              A dashboard built for <span className="gradient-text">cloud teams</span>
+              Who <span className="gradient-text">We Are</span>
             </h2>
-            <p className="mt-5 text-muted-foreground text-lg">
-              Monitor costs, detect anomalies, and act on optimization recommendations — all from one powerful interface.
-            </p>
           </motion.div>
 
-          <motion.div custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scaleIn} className="relative max-w-5xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInLeft} className="space-y-6">
+              <p className="text-muted-foreground text-base leading-relaxed">
+                Our company focuses on developing innovative cloud monitoring solutions that help businesses manage and control their cloud infrastructure costs efficiently.
+              </p>
+              <p className="text-muted-foreground text-base leading-relaxed">
+                The Cloud Cost Anomaly Detection & Optimization System is designed to analyze cloud usage data, detect unusual spending patterns, and provide intelligent recommendations to reduce unnecessary expenses.
+              </p>
+              <p className="text-muted-foreground text-base leading-relaxed">
+                This platform enables organizations to monitor their cloud costs in real time, identify anomalies quickly, and optimize their resources for better performance and cost savings.
+              </p>
+            </motion.div>
+
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInRight} className="space-y-8">
+              <div className="glass-card p-8">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Sparkles className="w-5 h-5 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-bold text-foreground">Our Mission</h3>
+                </div>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                  Our mission is to help organizations gain better visibility and control over their cloud spending by providing intelligent tools for cost monitoring, anomaly detection, and optimization.
+                </p>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  We aim to simplify cloud cost management and support businesses in making data-driven decisions.
+                </p>
+              </div>
+
+              {/* Feature checklist */}
+              <div className="grid sm:grid-cols-2 gap-3">
+                {[
+                  "Multi-cloud cost aggregation",
+                  "Real-time anomaly alerts",
+                  "AI-powered recommendations",
+                  "Custom spending thresholds",
+                  "Team collaboration tools",
+                  "Exportable reports & insights",
+                ].map((item) => (
+                  <div key={item} className="flex items-center gap-3 px-4 py-3 rounded-xl bg-secondary/30 border border-border/30">
+                    <CheckCircle2 className="w-4 h-4 text-[hsl(var(--success))] shrink-0" />
+                    <span className="text-sm text-muted-foreground">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Dashboard Preview */}
+          <motion.div custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scaleIn} className="relative max-w-5xl mx-auto mt-20">
             <div className="rounded-2xl overflow-hidden border border-border/50 shadow-2xl shadow-primary/10 gradient-border">
               <img src={dashboardPreview} alt="Cloud Cost ADOS dashboard" className="w-full" loading="lazy" />
             </div>
             <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-3/4 h-20 bg-primary/8 blur-3xl rounded-full" />
-          </motion.div>
-
-          {/* Feature checklist */}
-          <motion.div custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
-            {[
-              "Multi-cloud cost aggregation",
-              "Real-time anomaly alerts",
-              "AI-powered recommendations",
-              "Custom spending thresholds",
-              "Team collaboration tools",
-              "Exportable reports & insights",
-            ].map((item) => (
-              <div key={item} className="flex items-center gap-3 px-4 py-3 rounded-xl bg-secondary/30 border border-border/30">
-                <CheckCircle2 className="w-4 h-4 text-[hsl(var(--success))] shrink-0" />
-                <span className="text-sm text-muted-foreground">{item}</span>
-              </div>
-            ))}
           </motion.div>
         </div>
       </section>
