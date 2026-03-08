@@ -12,6 +12,9 @@ import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 import dashboardPreview from "@/assets/dashboard-preview.png";
+import avatarSarah from "@/assets/avatar-sarah.png";
+import avatarMarcus from "@/assets/avatar-marcus.png";
+import avatarPriya from "@/assets/avatar-priya.png";
 
 /* ─── animation variants ─── */
 const fadeUp = {
