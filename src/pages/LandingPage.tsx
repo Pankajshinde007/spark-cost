@@ -15,6 +15,19 @@ import dashboardPreview from "@/assets/dashboard-preview.png";
 import avatarSarah from "@/assets/avatar-sarah.png";
 import avatarMarcus from "@/assets/avatar-marcus.png";
 import avatarPriya from "@/assets/avatar-priya.png";
+import logoAws from "@/assets/logo-aws.png";
+import logoAzure from "@/assets/logo-azure.png";
+import logoGcp from "@/assets/logo-gcp.png";
+import logoKubernetes from "@/assets/logo-kubernetes.png";
+import logoTerraform from "@/assets/logo-terraform.png";
+
+const cloudLogos: Record<string, string> = {
+  "Amazon Web Services": logoAws,
+  "Google Cloud": logoGcp,
+  "Microsoft Azure": logoAzure,
+  "Kubernetes": logoKubernetes,
+  "Terraform": logoTerraform,
+};
 
 /* ─── animation variants ─── */
 const fadeUp = {
