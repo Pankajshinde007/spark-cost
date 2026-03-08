@@ -74,6 +74,7 @@ const AdminPage = () => {
       if (u.id === userId) {
         const newRole = u.role === "admin" ? "user" as const : "admin" as const;
         toast.success(`Role updated`, { description: `${u.name} is now ${newRole}` });
+        addLog("role_change", `${u.role === "admin" ? "Demoted" : "Promoted"} ${u.name} to ${newRole}`);
         return { ...u, role: newRole };
       }
       return u;
