@@ -403,7 +403,7 @@ const LandingPage = () => {
                 <span className="text-lg font-bold text-foreground">Cloud Cost ADOS</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                Cloud cost monitoring and optimization platform for modern teams.
+                Cloud Cost Anomaly Detection & Optimization System for modern teams.
               </p>
               <div className="flex gap-3 mt-4">
                 <a href="#" className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors">
