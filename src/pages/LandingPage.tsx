@@ -749,7 +749,7 @@ const LandingPage = () => {
           </div>
 
           <div className="border-t border-border/30 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Cloud Cost ADOS. All rights reserved.</p>
+            <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} SparkCost. All rights reserved.</p>
             <p className="text-xs text-muted-foreground">Built with ❤️ for cloud-native teams</p>
           </div>
         </div>
