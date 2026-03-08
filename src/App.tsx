@@ -13,6 +13,7 @@ import RecommendationsPage from "./pages/RecommendationsPage";
 import CloudAccountsPage from "./pages/CloudAccountsPage";
 import AdminPage from "./pages/AdminPage";
 import AdminLoginPage from "./pages/AdminLoginPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import SettingsPage from "./pages/SettingsPage";
 import NotFound from "./pages/NotFound";
 import { ReactNode } from "react";
@@ -55,6 +56,7 @@ const App = () => (
             <Route path="/" element={<PublicRoute />} />
             <Route path="/login" element={<LoginRoute />} />
             <Route path="/admin-login" element={<AdminLoginPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
             <Route path="/cloud-accounts" element={<ProtectedRoute><CloudAccountsPage /></ProtectedRoute>} />
             <Route path="/anomalies" element={<ProtectedRoute><AnomaliesPage /></ProtectedRoute>} />
