@@ -440,7 +440,7 @@ const LandingPage = () => {
 
           <div className="border-t border-border/30 mt-10 pt-6 text-center">
             <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()} Pankaj. All rights reserved.
+              © {new Date().getFullYear()} SparkCost. All rights reserved.
             </p>
           </div>
         </div>
