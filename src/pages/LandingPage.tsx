@@ -332,7 +332,7 @@ const LandingPage = () => {
                 </div>
               </motion.div>
               <div className="absolute -bottom-8 -left-8 w-48 h-48 bg-primary/10 rounded-full blur-3xl" />
-              <div className="absolute -top-8 -right-8 w-40 h-40 bg-[hsl(270,70%,60%)] opacity-10 rounded-full blur-3xl" />
+              <div className="absolute -top-8 -right-8 w-40 h-40 bg-accent opacity-10 rounded-full blur-3xl" />
             </motion.div>
           </div>
         </motion.div>
