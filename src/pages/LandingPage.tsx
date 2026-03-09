@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
+import { WaveDivider } from "@/components/WaveDivider";
 import dashboardPreview from "@/assets/dashboard-preview.png";
 import avatarSarah from "@/assets/avatar-sarah.png";
 import avatarMarcus from "@/assets/avatar-marcus.png";
@@ -351,6 +352,8 @@ const LandingPage = () => {
         </motion.div>
       </section>
 
+      <WaveDivider variant="primary" />
+
       {/* ── Trusted By ── */}
       <section className="py-16 border-t border-border/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -382,6 +385,8 @@ const LandingPage = () => {
           </motion.div>
         </div>
       </section>
+
+      <WaveDivider variant="subtle" flip />
 
       {/* ── Features ── */}
       <section id="features" className="py-24 lg:py-32 section-divider">
@@ -422,6 +427,8 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+
+      <WaveDivider variant="accent" />
 
       {/* ── How It Works ── */}
       <section className="py-24 lg:py-32">
@@ -464,6 +471,8 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+
+      <WaveDivider variant="primary" flip />
 
       {/* ── Stats ── */}
       <section id="pricing" className="py-24 lg:py-32 section-divider relative">
@@ -511,6 +520,8 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+
+      <WaveDivider variant="subtle" />
 
       {/* ── About Us ── */}
       <section id="about" className="py-24 lg:py-32 section-divider">
@@ -590,6 +601,8 @@ const LandingPage = () => {
         </div>
       </section>
 
+      <WaveDivider variant="accent" flip />
+
       {/* ── Testimonials ── */}
       <section className="py-24 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -639,6 +652,8 @@ const LandingPage = () => {
         </div>
       </section>
 
+      <WaveDivider variant="primary" />
+
       {/* ── FAQ ── */}
       <section className="py-24 lg:py-32 section-divider">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -662,6 +677,8 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+
+      <WaveDivider variant="subtle" flip />
 
       {/* ── CTA Banner ── */}
       <section className="py-24 lg:py-28">
@@ -688,6 +705,8 @@ const LandingPage = () => {
           </motion.div>
         </div>
       </section>
+
+      <WaveDivider variant="accent" />
 
       {/* ── Contact ── */}
       <section id="contact" className="py-24 lg:py-32 section-divider">
@@ -748,6 +767,8 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+
+      <WaveDivider variant="subtle" flip />
 
       {/* ── Footer ── */}
       <footer className="border-t border-border/30 py-14">
