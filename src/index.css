@@ -239,15 +239,15 @@
   }
 
   .cta-gradient {
-    background: linear-gradient(135deg, hsl(217 91% 60% / 0.15), hsl(262 83% 58% / 0.1), hsl(160 84% 39% / 0.05));
+    background: linear-gradient(135deg, hsl(192 80% 48% / 0.15), hsl(172 66% 42% / 0.1), hsl(162 72% 42% / 0.05));
   }
 
   .neon-glow {
-    box-shadow: 0 0 8px hsl(217 91% 60% / 0.4), 0 0 24px hsl(217 91% 60% / 0.2), 0 0 48px hsl(262 83% 58% / 0.1);
+    box-shadow: 0 0 8px hsl(192 80% 48% / 0.4), 0 0 24px hsl(192 80% 48% / 0.2), 0 0 48px hsl(172 66% 42% / 0.1);
   }
 
   .neon-glow:hover {
-    box-shadow: 0 0 12px hsl(217 91% 60% / 0.5), 0 0 32px hsl(217 91% 60% / 0.3), 0 0 64px hsl(262 83% 58% / 0.15);
+    box-shadow: 0 0 12px hsl(192 80% 48% / 0.5), 0 0 32px hsl(192 80% 48% / 0.3), 0 0 64px hsl(172 66% 42% / 0.15);
   }
 
   @keyframes particle-float {
