@@ -352,6 +352,8 @@ const LandingPage = () => {
         </motion.div>
       </section>
 
+      <WaveDivider variant="primary" />
+
       {/* ── Trusted By ── */}
       <section className="py-16 border-t border-border/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
