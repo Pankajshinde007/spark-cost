@@ -263,4 +263,116 @@
     pointer-events: none;
     animation: particle-float linear infinite;
   }
+
+  @keyframes ocean-flow {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 50% 100%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 50% 0%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .ocean-gradient-bg {
+    background: linear-gradient(
+      -45deg,
+      hsl(210 45% 4%),
+      hsl(200 50% 8%),
+      hsl(192 60% 10%),
+      hsl(180 50% 7%),
+      hsl(210 45% 6%),
+      hsl(195 55% 9%)
+    );
+    background-size: 400% 400%;
+    animation: ocean-flow 15s ease infinite;
+  }
+
+  @keyframes wave-drift {
+    0% { transform: translateX(-100%) translateY(0); }
+    50% { transform: translateX(0%) translateY(-8px); }
+    100% { transform: translateX(100%) translateY(0); }
+  }
+
+  .ocean-wave {
+    position: absolute;
+    bottom: 0;
+    left: -100%;
+    width: 300%;
+    height: 60px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(192 80% 48% / 0.04),
+      hsl(172 66% 42% / 0.06),
+      hsl(192 80% 48% / 0.04),
+      transparent
+    );
+    border-radius: 50%;
+    animation: wave-drift 8s ease-in-out infinite;
+  }
+
+  .ocean-wave-2 {
+    position: absolute;
+    bottom: 20px;
+    left: -100%;
+    width: 300%;
+    height: 40px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(172 66% 42% / 0.03),
+      hsl(187 85% 50% / 0.05),
+      hsl(172 66% 42% / 0.03),
+      transparent
+    );
+    border-radius: 50%;
+    animation: wave-drift 12s ease-in-out infinite reverse;
+  }
+
+  @keyframes aurora-shift {
+    0%, 100% {
+      opacity: 0.15;
+      transform: translateY(0) scaleX(1);
+    }
+    33% {
+      opacity: 0.25;
+      transform: translateY(-20px) scaleX(1.1);
+    }
+    66% {
+      opacity: 0.12;
+      transform: translateY(10px) scaleX(0.95);
+    }
+  }
+
+  .ocean-aurora {
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    top: 20%;
+    background: linear-gradient(
+      90deg,
+      transparent 10%,
+      hsl(192 80% 48% / 0.08) 30%,
+      hsl(172 66% 42% / 0.12) 50%,
+      hsl(187 85% 50% / 0.08) 70%,
+      transparent 90%
+    );
+    filter: blur(40px);
+    animation: aurora-shift 10s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes bubble-rise {
+    0% { transform: translateY(100%) scale(0.5); opacity: 0; }
+    20% { opacity: 0.6; }
+    100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+  }
+
+  .ocean-bubble {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid hsl(192 80% 48% / 0.15);
+    background: hsl(192 80% 48% / 0.03);
+    pointer-events: none;
+    animation: bubble-rise linear infinite;
+  }
 }

@@ -222,12 +222,30 @@ const LandingPage = () => {
       </nav>
 
       {/* ── Hero ── */}
-      <section id="home" className="relative overflow-hidden min-h-[95vh] flex items-center">
+      <section id="home" className="relative overflow-hidden min-h-[95vh] flex items-center ocean-gradient-bg">
         <div className="hero-glow -top-40 -left-40" />
         <div className="hero-glow-purple bottom-20 right-10" />
         <div className="hero-glow-cyan bottom-0 right-0 opacity-40" />
+        <div className="ocean-aurora" />
+        <div className="ocean-wave" />
+        <div className="ocean-wave-2" />
+        {/* Animated bubbles */}
+        {[...Array(6)].map((_, i) => (
+          <div
+            key={`bubble-${i}`}
+            className="ocean-bubble"
+            style={{
+              width: `${8 + i * 4}px`,
+              height: `${8 + i * 4}px`,
+              left: `${10 + i * 15}%`,
+              bottom: '0',
+              animationDuration: `${6 + i * 2}s`,
+              animationDelay: `${i * 1.2}s`,
+            }}
+          />
+        ))}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
-        <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(hsl(215 20% 25% / 0.25) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(hsl(192 80% 48% / 0.12) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
         <motion.div style={{ opacity: heroOpacity, scale: heroScale }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10 w-full">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -314,7 +332,7 @@ const LandingPage = () => {
                 </div>
               </motion.div>
               <div className="absolute -bottom-8 -left-8 w-48 h-48 bg-primary/10 rounded-full blur-3xl" />
-              <div className="absolute -top-8 -right-8 w-40 h-40 bg-[hsl(270,70%,60%)] opacity-10 rounded-full blur-3xl" />
+              <div className="absolute -top-8 -right-8 w-40 h-40 bg-accent opacity-10 rounded-full blur-3xl" />
             </motion.div>
           </div>
         </motion.div>
