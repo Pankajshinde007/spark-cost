@@ -85,8 +85,8 @@
     @apply glass-card transition-all duration-500;
   }
   .glass-card-hover:hover {
-    border-color: hsl(217 91% 60% / 0.4);
-    box-shadow: 0 0 30px hsl(217 91% 60% / 0.08), 0 8px 32px hsl(0 0% 0% / 0.3);
+    border-color: hsl(192 80% 48% / 0.35);
+    box-shadow: 0 0 30px hsl(192 80% 48% / 0.08), 0 8px 32px hsl(0 0% 0% / 0.3);
     transform: translateY(-4px);
   }
 
