@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
+import { WaveDivider } from "@/components/WaveDivider";
 import dashboardPreview from "@/assets/dashboard-preview.png";
 import avatarSarah from "@/assets/avatar-sarah.png";
 import avatarMarcus from "@/assets/avatar-marcus.png";
