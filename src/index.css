@@ -91,7 +91,7 @@
   }
 
   .glow-primary {
-    box-shadow: 0 0 24px hsl(217 91% 60% / 0.12), 0 0 48px hsl(262 83% 58% / 0.06);
+    box-shadow: 0 0 24px hsl(192 80% 48% / 0.12), 0 0 48px hsl(172 66% 42% / 0.06);
   }
 
   .glow-cyan {
