@@ -189,8 +189,8 @@
   }
 
   @keyframes pulseGlow {
-    0%, 100% { box-shadow: 0 0 20px hsl(217 91% 60% / 0.1); }
-    50% { box-shadow: 0 0 40px hsl(217 91% 60% / 0.25); }
+    0%, 100% { box-shadow: 0 0 20px hsl(192 80% 48% / 0.1); }
+    50% { box-shadow: 0 0 40px hsl(192 80% 48% / 0.25); }
   }
 
   .shimmer {
