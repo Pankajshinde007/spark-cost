@@ -472,6 +472,8 @@ const LandingPage = () => {
         </div>
       </section>
 
+      <WaveDivider variant="primary" flip />
+
       {/* ── Stats ── */}
       <section id="pricing" className="py-24 lg:py-32 section-divider relative">
         <div className="absolute inset-0 cta-gradient" />
