@@ -130,7 +130,7 @@
     width: 600px;
     height: 600px;
     border-radius: 50%;
-    background: radial-gradient(circle, hsl(217 91% 60% / 0.12), transparent 70%);
+    background: radial-gradient(circle, hsl(192 80% 48% / 0.12), transparent 70%);
     filter: blur(80px);
     pointer-events: none;
   }
