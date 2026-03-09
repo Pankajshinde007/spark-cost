@@ -224,7 +224,7 @@
     transform: translateX(-50%);
     width: 200px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, hsl(217 91% 60% / 0.4), transparent);
+    background: linear-gradient(90deg, transparent, hsl(192 80% 48% / 0.4), transparent);
   }
 
   .trusted-logo {
