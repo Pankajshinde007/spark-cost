@@ -68,6 +68,12 @@ const SignUpPage = () => {
         </div>
 
         <div className="glass-card p-8 gradient-border">
+          {/* Free trial badge */}
+          <div className="flex items-center gap-2 mb-4 px-3 py-2.5 rounded-lg bg-[hsl(var(--success))]/5 border border-[hsl(var(--success))]/20">
+            <CheckCircle2 className="w-4 h-4 text-[hsl(var(--success))] flex-shrink-0" />
+            <p className="text-[11px] text-[hsl(var(--success))] font-medium">🎉 14-day free trial included — no credit card needed</p>
+          </div>
+
           <div className="flex items-center gap-2 mb-6">
             <Sparkles className="w-4 h-4 text-accent" />
             <h2 className="text-base font-semibold text-foreground">Sign up for free</h2>
