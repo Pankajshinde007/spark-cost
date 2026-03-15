@@ -117,11 +117,19 @@ const LoginPage = () => {
             </button>
           </form>
 
-          <div className="flex items-center justify-center gap-1.5 mt-6 pt-4 border-t border-border/30">
-            <Shield className="w-3.5 h-3.5 text-muted-foreground" />
-            <Link to="/admin-login" className="text-xs text-muted-foreground hover:text-accent transition-colors">
-              Admin Login
-            </Link>
+          <div className="flex flex-col items-center gap-3 mt-6 pt-4 border-t border-border/30">
+            <p className="text-xs text-muted-foreground">
+              Don't have an account?{" "}
+              <Link to="/signup" className="text-accent hover:underline transition-colors">
+                Sign up
+              </Link>
+            </p>
+            <div className="flex items-center gap-1.5">
+              <Shield className="w-3.5 h-3.5 text-muted-foreground" />
+              <Link to="/admin-login" className="text-xs text-muted-foreground hover:text-accent transition-colors">
+                Admin Login
+              </Link>
+            </div>
           </div>
         </div>
       </motion.div>

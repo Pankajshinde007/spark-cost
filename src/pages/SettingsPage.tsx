@@ -62,6 +62,77 @@ const SettingsPage = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {/* Profile Settings */}
+        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="glass-card p-6">
+          <div className="flex items-center gap-2 mb-5">
+            <div className="w-1.5 h-4 rounded-full bg-gradient-to-b from-accent to-primary" />
+            <User className="w-4 h-4 text-accent" />
+            <h3 className="text-sm font-semibold text-foreground">Profile Settings</h3>
+          </div>
+          <div className="space-y-4">
+            <div>
+              <label className="text-xs text-muted-foreground block mb-1.5">Full Name</label>
+              <input
+                type="text"
+                value={profile.name}
+                onChange={e => setProfile(p => ({ ...p, name: e.target.value }))}
+                className="w-full px-3 py-2 rounded-lg bg-secondary/50 border border-border/40 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+              />
+            </div>
+            <div>
+              <label className="text-xs text-muted-foreground block mb-1.5">Email</label>
+              <input
+                type="email"
+                value={profile.email}
+                onChange={e => setProfile(p => ({ ...p, email: e.target.value }))}
+                className="w-full px-3 py-2 rounded-lg bg-secondary/50 border border-border/40 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+              />
+            </div>
+            <div>
+              <label className="text-xs text-muted-foreground flex items-center gap-1 mb-1.5">
+                <Lock className="w-3 h-3" /> New Password
+              </label>
+              <input
+                type="password"
+                value={profile.newPassword}
+                onChange={e => setProfile(p => ({ ...p, newPassword: e.target.value }))}
+                placeholder="Leave blank to keep current"
+                className="w-full px-3 py-2 rounded-lg bg-secondary/50 border border-border/40 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+              />
+            </div>
+            <div>
+              <label className="text-xs text-muted-foreground block mb-1.5">Confirm Password</label>
+              <input
+                type="password"
+                value={profile.confirmPassword}
+                onChange={e => setProfile(p => ({ ...p, confirmPassword: e.target.value }))}
+                placeholder="Confirm new password"
+                className="w-full px-3 py-2 rounded-lg bg-secondary/50 border border-border/40 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+              />
+            </div>
+            <button
+              onClick={() => {
+                if (profile.newPassword && profile.newPassword !== profile.confirmPassword) {
+                  toast.error("Passwords do not match");
+                  return;
+                }
+                const success = updateProfile({
+                  name: profile.name,
+                  email: profile.email,
+                  ...(profile.newPassword ? { password: profile.newPassword } : {}),
+                });
+                if (success) {
+                  toast.success("Profile updated successfully");
+                  setProfile(p => ({ ...p, newPassword: "", confirmPassword: "" }));
+                }
+              }}
+              className="w-full py-2 rounded-lg bg-gradient-to-r from-accent to-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-all neon-glow"
+            >
+              Update Profile
+            </button>
+          </div>
+        </motion.div>
+
         {/* Alert Thresholds */}
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="glass-card p-6">
           <div className="flex items-center gap-2 mb-5">
