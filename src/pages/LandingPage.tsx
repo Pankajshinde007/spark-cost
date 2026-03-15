@@ -474,10 +474,90 @@ const LandingPage = () => {
 
       <WaveDivider variant="primary" flip />
 
-      {/* ── Stats ── */}
+      {/* ── Pricing / Free Trial ── */}
       <section id="pricing" className="py-24 lg:py-32 section-divider relative">
         <div className="absolute inset-0 cta-gradient" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-16">
+            <span className="inline-block text-xs font-semibold text-[hsl(var(--warning))] uppercase tracking-[0.15em] mb-4 px-4 py-1.5 rounded-full bg-[hsl(var(--warning))]/5 border border-[hsl(var(--warning))]/20">
+              Pricing
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
+              Start free, <span className="gradient-text">scale as you grow</span>
+            </h2>
+            <p className="mt-5 text-muted-foreground text-lg">No credit card required. Try SparkCost free for 14 days.</p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-6 mb-20">
+            {[
+              {
+                name: "Free Trial",
+                price: "$0",
+                period: "14 days",
+                desc: "Explore all features with no commitment",
+                features: ["1 cloud account", "Basic anomaly detection", "Daily email reports", "Community support"],
+                cta: "Start Free Trial",
+                popular: false,
+              },
+              {
+                name: "Pro",
+                price: "$49",
+                period: "/month",
+                desc: "For growing teams managing cloud costs",
+                features: ["5 cloud accounts", "Advanced AI detection", "Real-time Slack alerts", "Priority support", "Custom thresholds"],
+                cta: "Start 14-Day Free Trial",
+                popular: true,
+              },
+              {
+                name: "Enterprise",
+                price: "Custom",
+                period: "",
+                desc: "For large organizations with complex needs",
+                features: ["Unlimited accounts", "Dedicated ML models", "SSO & RBAC", "24/7 support", "SLA guarantee", "Custom integrations"],
+                cta: "Contact Sales",
+                popular: false,
+              },
+            ].map((plan, i) => (
+              <motion.div
+                key={plan.name}
+                custom={i + 1}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                className={`glass-card p-8 relative overflow-hidden ${plan.popular ? "border-primary/40 shadow-lg shadow-primary/10" : ""}`}
+              >
+                {plan.popular && (
+                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary/10 border border-primary/30 text-primary text-[10px] font-semibold uppercase tracking-wider">
+                    Most Popular
+                  </div>
+                )}
+                <h3 className="text-lg font-bold text-foreground">{plan.name}</h3>
+                <div className="flex items-baseline gap-1 mt-3">
+                  <span className="text-4xl font-extrabold gradient-text">{plan.price}</span>
+                  <span className="text-sm text-muted-foreground">{plan.period}</span>
+                </div>
+                <p className="text-sm text-muted-foreground mt-2">{plan.desc}</p>
+                <ul className="mt-6 space-y-3">
+                  {plan.features.map(f => (
+                    <li key={f} className="flex items-center gap-2 text-sm text-foreground/80">
+                      <CheckCircle2 className="w-4 h-4 text-[hsl(var(--success))] flex-shrink-0" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <Button
+                  onClick={() => navigate("/signup")}
+                  className={`w-full mt-8 ${plan.popular ? "shadow-lg shadow-primary/25" : ""}`}
+                  variant={plan.popular ? "default" : "outline"}
+                >
+                  {plan.cta}
+                </Button>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Stats */}
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInLeft}>
               <span className="inline-block text-xs font-semibold text-[hsl(var(--warning))] uppercase tracking-[0.15em] mb-4 px-4 py-1.5 rounded-full bg-[hsl(var(--warning))]/5 border border-[hsl(var(--warning))]/20">
@@ -490,7 +570,7 @@ const LandingPage = () => {
                 Organizations using our monitoring system detect cost anomalies faster and cut unnecessary cloud expenses through automated analysis.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <Button size="lg" onClick={() => navigate("/login")} className="shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
+                <Button size="lg" onClick={() => navigate("/signup")} className="shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
                   Start optimizing today <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>

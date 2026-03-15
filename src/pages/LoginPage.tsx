@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate, Link } from "react-router-dom";
-import { Zap, Eye, EyeOff, Shield, Sparkles } from "lucide-react";
+import { Zap, Eye, EyeOff, Shield, Sparkles, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { Particles } from "@/components/Particles";
 
@@ -46,6 +46,9 @@ const LoginPage = () => {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="w-full max-w-md relative z-10"
       >
+        <Link to="/" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors mb-6">
+          <ArrowLeft className="w-3.5 h-3.5" /> Back to home
+        </Link>
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto mb-4 shadow-lg neon-glow">
@@ -57,6 +60,12 @@ const LoginPage = () => {
 
         {/* Form */}
         <div className="glass-card p-8 gradient-border">
+          {/* Free trial banner */}
+          <div className="flex items-center gap-2 mb-4 px-3 py-2.5 rounded-lg bg-primary/5 border border-primary/20">
+            <Sparkles className="w-4 h-4 text-primary flex-shrink-0" />
+            <p className="text-[11px] text-primary/90 font-medium">🎉 Start your 14-day free trial — no credit card required</p>
+          </div>
+
           <div className="flex items-center gap-2 mb-6">
             <Sparkles className="w-4 h-4 text-accent" />
             <h2 className="text-base font-semibold text-foreground">Sign in to your account</h2>
