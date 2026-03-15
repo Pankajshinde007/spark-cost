@@ -27,6 +27,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return true;
   };
 
+  const signup = (name: string, email: string, _password: string) => {
+    setUser({
+      name,
+      email,
+      role: "user",
+    });
+    return true;
+  };
+
+  const updateProfile = (data: { name?: string; email?: string; password?: string }) => {
+    if (!user) return false;
+    setUser({
+      ...user,
+      name: data.name || user.name,
+      email: data.email || user.email,
+    });
+    return true;
+  };
+
   const adminLogin = (name: string, password: string) => {
     if (name.toLowerCase().trim() === ADMIN_NAME && password === ADMIN_PASSWORD) {
       setUser({
