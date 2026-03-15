@@ -6,6 +6,14 @@ import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
 
 const SettingsPage = () => {
+  const { user, updateProfile } = useAuth();
+  const [profile, setProfile] = useState({
+    name: user?.name || "",
+    email: user?.email || "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+
   const [thresholds, setThresholds] = useState({
     dailyCostSpike: 50,
     weeklyCostIncrease: 20,
