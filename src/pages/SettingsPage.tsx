@@ -1,8 +1,9 @@
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Settings, Bell, DollarSign, Mail, Save, RotateCcw, Sparkles, Shield } from "lucide-react";
+import { Settings, Bell, DollarSign, Mail, Save, RotateCcw, Sparkles, Shield, User, Lock } from "lucide-react";
 import { toast } from "sonner";
+import { useAuth } from "@/hooks/useAuth";
 
 const SettingsPage = () => {
   const [thresholds, setThresholds] = useState({
