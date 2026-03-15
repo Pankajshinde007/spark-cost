@@ -4,7 +4,9 @@ interface AuthContextType {
   isAuthenticated: boolean;
   user: { name: string; email: string; role: "admin" | "user" } | null;
   login: (email: string, password: string) => boolean;
+  signup: (name: string, email: string, password: string) => boolean;
   adminLogin: (name: string, password: string) => boolean;
+  updateProfile: (data: { name?: string; email?: string; password?: string }) => boolean;
   logout: () => void;
 }
 
