@@ -4,7 +4,9 @@ interface AuthContextType {
   isAuthenticated: boolean;
   user: { name: string; email: string; role: "admin" | "user" } | null;
   login: (email: string, password: string) => boolean;
+  signup: (name: string, email: string, password: string) => boolean;
   adminLogin: (name: string, password: string) => boolean;
+  updateProfile: (data: { name?: string; email?: string; password?: string }) => boolean;
   logout: () => void;
 }
 
@@ -25,6 +27,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return true;
   };
 
+  const signup = (name: string, email: string, _password: string) => {
+    setUser({
+      name,
+      email,
+      role: "user",
+    });
+    return true;
+  };
+
+  const updateProfile = (data: { name?: string; email?: string; password?: string }) => {
+    if (!user) return false;
+    setUser({
+      ...user,
+      name: data.name || user.name,
+      email: data.email || user.email,
+    });
+    return true;
+  };
+
   const adminLogin = (name: string, password: string) => {
     if (name.toLowerCase().trim() === ADMIN_NAME && password === ADMIN_PASSWORD) {
       setUser({
@@ -40,7 +61,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => setUser(null);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated: !!user, user, login, adminLogin, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated: !!user, user, login, signup, adminLogin, updateProfile, logout }}>
       {children}
     </AuthContext.Provider>
   );
