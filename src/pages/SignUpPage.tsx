@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate, Link } from "react-router-dom";
-import { Zap, Eye, EyeOff, UserPlus, Sparkles } from "lucide-react";
+import { Zap, Eye, EyeOff, UserPlus, Sparkles, ArrowLeft, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Particles } from "@/components/Particles";
 
