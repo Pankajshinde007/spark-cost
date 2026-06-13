@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
-  Cloud, Activity, Shield, TrendingDown, Zap, BarChart3,
+  Cloud, Shield, TrendingDown, Zap, BarChart3,
   Mail, Phone, MapPin, Linkedin, Twitter, Menu, X,
   ArrowRight, CheckCircle2, Sparkles, Globe, Lock, Bell,
-  LineChart, AlertTriangle, DollarSign, Users,
+  LineChart, AlertTriangle, DollarSign,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -30,11 +30,11 @@ const cloudLogos: Record<string, string> = {
   "Terraform": logoTerraform,
 };
 
-/* ─── animation variants ─── */
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: (i: number) => ({
-    opacity: 1, y: 0,
+    opacity: 1,
+    y: 0,
     transition: { delay: i * 0.12, duration: 0.6, ease: "easeOut" as const },
   }),
 };
@@ -42,7 +42,8 @@ const fadeUp = {
 const scaleIn = {
   hidden: { opacity: 0, scale: 0.9 },
   visible: (i: number) => ({
-    opacity: 1, scale: 1,
+    opacity: 1,
+    scale: 1,
     transition: { delay: i * 0.1, duration: 0.5, ease: "easeOut" as const },
   }),
 };
@@ -57,7 +58,6 @@ const slideInRight = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" as const } },
 };
 
-/* ─── data ─── */
 const stats = [
   { value: 70, suffix: "%", label: "Faster anomaly detection", icon: Zap },
   { value: 24, suffix: "h", label: "Average alert time", icon: Bell },
@@ -121,7 +121,6 @@ const faqs = [
   },
 ];
 
-/* ─── animated counter ─── */
 const AnimatedCounter = ({ value, suffix }: { value: number; suffix: string }) => {
   const [count, setCount] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -148,7 +147,6 @@ const AnimatedCounter = ({ value, suffix }: { value: number; suffix: string }) =
   return <span>{count}{suffix}</span>;
 };
 
-/* ─── main component ─── */
 const LandingPage = () => {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -169,7 +167,6 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      {/* ── Navbar ── */}
       <nav className="sticky top-0 z-50 border-b border-border/50 bg-background/70 backdrop-blur-2xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -196,9 +193,19 @@ const LandingPage = () => {
               ))}
             </div>
 
-            <div className="hidden md:flex items-center gap-3">
-              <Button variant="ghost" size="sm" onClick={() => navigate("/login")}>Login</Button>
-              <Button size="sm" onClick={() => navigate("/login")} className="shadow-lg shadow-primary/25">
+            <div className="hidden md:flex items-center gap-3 relative z-10">
+              <Button variant="ghost" size="sm" type="button" onClick={() => (window.location.href = "/login")}>
+                Login
+              </Button>
+              <Button variant="outline" size="sm" type="button" onClick={() => (window.location.href = "/admin-login")}>
+                Admin Login
+              </Button>
+              <Button
+                size="sm"
+                type="button"
+                className="shadow-lg shadow-primary/25"
+                onClick={() => (window.location.href = "/login")}
+              >
                 <Sparkles className="w-3.5 h-3.5 mr-1.5" /> Get Started Free
               </Button>
             </div>
@@ -211,18 +218,30 @@ const LandingPage = () => {
           {mobileMenuOpen && (
             <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="md:hidden pb-4 space-y-2">
               {["Home", "Features", "Pricing", "About", "Contact"].map((item) => (
-                <button key={item} onClick={() => scrollTo(item.toLowerCase())} className="block w-full text-left px-3 py-2 text-sm text-muted-foreground hover:text-foreground">{item}</button>
+                <button
+                  key={item}
+                  onClick={() => scrollTo(item.toLowerCase())}
+                  className="block w-full text-left px-3 py-2 text-sm text-muted-foreground hover:text-foreground"
+                >
+                  {item}
+                </button>
               ))}
-              <div className="flex gap-2 px-3 pt-2">
-                <Button variant="ghost" size="sm" onClick={() => navigate("/login")}>Login</Button>
-                <Button size="sm" onClick={() => navigate("/login")}>Get Started</Button>
+              <div className="flex flex-wrap gap-2 px-3 pt-2 relative z-10">
+                <Button variant="ghost" size="sm" type="button" onClick={() => (window.location.href = "/login")}>
+                  Login
+                </Button>
+                <Button variant="outline" size="sm" type="button" onClick={() => (window.location.href = "/admin-login")}>
+                  Admin Login
+                </Button>
+                <Button size="sm" type="button" onClick={() => (window.location.href = "/login")}>
+                  Get Started
+                </Button>
               </div>
             </motion.div>
           )}
         </div>
       </nav>
 
-      {/* ── Hero ── */}
       <section id="home" className="relative overflow-hidden min-h-[95vh] flex items-center ocean-gradient-bg">
         <div className="hero-glow -top-40 -left-40" />
         <div className="hero-glow-purple bottom-20 right-10" />
@@ -230,7 +249,6 @@ const LandingPage = () => {
         <div className="ocean-aurora" />
         <div className="ocean-wave" />
         <div className="ocean-wave-2" />
-        {/* Animated bubbles */}
         {[...Array(6)].map((_, i) => (
           <div
             key={`bubble-${i}`}
@@ -239,18 +257,21 @@ const LandingPage = () => {
               width: `${8 + i * 4}px`,
               height: `${8 + i * 4}px`,
               left: `${10 + i * 15}%`,
-              bottom: '0',
+              bottom: "0",
               animationDuration: `${6 + i * 2}s`,
               animationDelay: `${i * 1.2}s`,
             }}
           />
         ))}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
-        <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(hsl(192 80% 48% / 0.12) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        <div
+          className="absolute inset-0"
+          style={{ backgroundImage: "radial-gradient(hsl(192 80% 48% / 0.12) 1px, transparent 1px)", backgroundSize: "40px 40px" }}
+        />
 
         <motion.div style={{ opacity: heroOpacity, scale: heroScale }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10 w-full">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
+            <div className="relative z-10">
               <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -264,20 +285,30 @@ const LandingPage = () => {
               </motion.div>
 
               <motion.h1 custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.05] text-foreground tracking-tight">
-                Detect. Optimize.{" "}
-                <span className="gradient-text">Save Big</span> on Cloud.
+                Detect. Optimize. <span className="gradient-text">Save Big</span> on Cloud.
               </motion.h1>
 
               <motion.p custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mt-6 text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-lg">
                 AI-powered anomaly detection for AWS & Google Cloud. Spot cost spikes instantly, optimize spending, and never overpay again.
               </motion.p>
 
-              <motion.div custom={3} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mt-10 flex flex-wrap gap-4">
-                <Button size="lg" onClick={() => navigate("/login")} className="px-8 h-12 text-base shadow-xl shadow-primary/30 hover:shadow-primary/50 transition-all hover:scale-105">
-                  <Zap className="w-4 h-4 mr-2" /> Start Free Monitoring
+              <motion.div custom={3} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mt-10 flex flex-wrap gap-4 relative z-10">
+                <Button
+                  size="lg"
+                  type="button"
+                  onClick={() => (window.location.href = "/login")}
+                  className="px-8 h-12 text-base shadow-xl shadow-primary/30 hover:shadow-primary/50 transition-all hover:scale-105"
+                >
+                  <Zap className="w-4 h-4 mr-2" /> User Login
                 </Button>
-                <Button size="lg" variant="outline" onClick={() => scrollTo("features")} className="px-8 h-12 text-base border-border/50 hover:border-primary/50 group">
-                  See How It Works <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                <Button
+                  size="lg"
+                  variant="outline"
+                  type="button"
+                  onClick={() => (window.location.href = "/admin-login")}
+                  className="px-8 h-12 text-base border-border/50 hover:border-primary/50"
+                >
+                  Admin Login
                 </Button>
               </motion.div>
 
@@ -295,13 +326,12 @@ const LandingPage = () => {
               </motion.div>
             </div>
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInRight} className="relative">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInRight} className="relative z-10">
               <div className="floating">
                 <div className="rounded-2xl overflow-hidden border border-border/50 shadow-2xl shadow-primary/15 gradient-border">
                   <img src={dashboardPreview} alt="Cloud cost monitoring dashboard showing cost charts and anomaly alerts" className="w-full" />
                 </div>
               </div>
-              {/* Floating metric cards */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -338,7 +368,6 @@ const LandingPage = () => {
           </div>
         </motion.div>
 
-        {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -354,18 +383,12 @@ const LandingPage = () => {
 
       <WaveDivider variant="primary" />
 
-      {/* ── Trusted By ── */}
       <section className="py-16 border-t border-border/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center text-xs text-muted-foreground uppercase tracking-[0.2em] mb-10">
             Trusted by cloud-native teams worldwide
           </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex flex-wrap justify-center items-center gap-10 md:gap-16"
-          >
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex flex-wrap justify-center items-center gap-10 md:gap-16">
             {["Amazon Web Services", "Google Cloud", "Microsoft Azure", "Kubernetes", "Terraform"].map((name, i) => (
               <motion.div
                 key={name}
@@ -388,7 +411,6 @@ const LandingPage = () => {
 
       <WaveDivider variant="subtle" flip />
 
-      {/* ── Features ── */}
       <section id="features" className="py-24 lg:py-32 section-divider">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-20">
@@ -396,8 +418,7 @@ const LandingPage = () => {
               Core capabilities
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-              Everything you need to{" "}
-              <span className="gradient-text">control cloud costs</span>
+              Everything you need to <span className="gradient-text">control cloud costs</span>
             </h2>
             <p className="mt-5 text-muted-foreground text-lg max-w-2xl mx-auto">
               AI-powered monitoring, anomaly detection, and optimization recommendations — all in one beautiful dashboard.
@@ -430,337 +451,6 @@ const LandingPage = () => {
 
       <WaveDivider variant="accent" />
 
-      {/* ── How It Works ── */}
-      <section className="py-24 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-20">
-            <span className="inline-block text-xs font-semibold text-[hsl(var(--success))] uppercase tracking-[0.15em] mb-4 px-4 py-1.5 rounded-full bg-[hsl(var(--success))]/5 border border-[hsl(var(--success))]/20">
-              Simple setup
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
-              Up and running in <span className="gradient-text">4 easy steps</span>
-            </h2>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {howItWorks.map((step, i) => (
-              <motion.div
-                key={step.step}
-                custom={i + 1}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                className="relative group"
-              >
-                <div className="glass-card p-7 h-full relative overflow-hidden group-hover:border-primary/30 transition-colors duration-500">
-                  <span className="text-6xl font-black text-primary/[0.06] absolute top-2 right-4 select-none">{step.step}</span>
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
-                    <step.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-base font-semibold text-foreground mb-2">{step.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
-                </div>
-                {i < 3 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-3 w-6 text-muted-foreground/20">
-                    <ArrowRight className="w-6 h-6" />
-                  </div>
-                )}
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <WaveDivider variant="primary" flip />
-
-      {/* ── Pricing / Free Trial ── */}
-      <section id="pricing" className="py-24 lg:py-32 section-divider relative">
-        <div className="absolute inset-0 cta-gradient" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-16">
-            <span className="inline-block text-xs font-semibold text-[hsl(var(--warning))] uppercase tracking-[0.15em] mb-4 px-4 py-1.5 rounded-full bg-[hsl(var(--warning))]/5 border border-[hsl(var(--warning))]/20">
-              Pricing
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
-              Start free, <span className="gradient-text">scale as you grow</span>
-            </h2>
-            <p className="mt-5 text-muted-foreground text-lg">No credit card required. Try SparkCost free for 14 days.</p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6 mb-20">
-            {[
-              {
-                name: "Free Trial",
-                price: "$0",
-                period: "14 days",
-                desc: "Explore all features with no commitment",
-                features: ["1 cloud account", "Basic anomaly detection", "Daily email reports", "Community support"],
-                cta: "Start Free Trial",
-                popular: false,
-              },
-              {
-                name: "Pro",
-                price: "$49",
-                period: "/month",
-                desc: "For growing teams managing cloud costs",
-                features: ["5 cloud accounts", "Advanced AI detection", "Real-time Slack alerts", "Priority support", "Custom thresholds"],
-                cta: "Start 14-Day Free Trial",
-                popular: true,
-              },
-              {
-                name: "Enterprise",
-                price: "Custom",
-                period: "",
-                desc: "For large organizations with complex needs",
-                features: ["Unlimited accounts", "Dedicated ML models", "SSO & RBAC", "24/7 support", "SLA guarantee", "Custom integrations"],
-                cta: "Contact Sales",
-                popular: false,
-              },
-            ].map((plan, i) => (
-              <motion.div
-                key={plan.name}
-                custom={i + 1}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                className={`glass-card p-8 relative overflow-hidden ${plan.popular ? "border-primary/40 shadow-lg shadow-primary/10" : ""}`}
-              >
-                {plan.popular && (
-                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary/10 border border-primary/30 text-primary text-[10px] font-semibold uppercase tracking-wider">
-                    Most Popular
-                  </div>
-                )}
-                <h3 className="text-lg font-bold text-foreground">{plan.name}</h3>
-                <div className="flex items-baseline gap-1 mt-3">
-                  <span className="text-4xl font-extrabold gradient-text">{plan.price}</span>
-                  <span className="text-sm text-muted-foreground">{plan.period}</span>
-                </div>
-                <p className="text-sm text-muted-foreground mt-2">{plan.desc}</p>
-                <ul className="mt-6 space-y-3">
-                  {plan.features.map(f => (
-                    <li key={f} className="flex items-center gap-2 text-sm text-foreground/80">
-                      <CheckCircle2 className="w-4 h-4 text-[hsl(var(--success))] flex-shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <Button
-                  onClick={() => navigate("/signup")}
-                  className={`w-full mt-8 ${plan.popular ? "shadow-lg shadow-primary/25" : ""}`}
-                  variant={plan.popular ? "default" : "outline"}
-                >
-                  {plan.cta}
-                </Button>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Stats */}
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInLeft}>
-              <span className="inline-block text-xs font-semibold text-[hsl(var(--warning))] uppercase tracking-[0.15em] mb-4 px-4 py-1.5 rounded-full bg-[hsl(var(--warning))]/5 border border-[hsl(var(--warning))]/20">
-                Real results
-              </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                Numbers that <span className="gradient-text-warm">speak for themselves</span>
-              </h2>
-              <p className="mt-5 text-muted-foreground text-lg">
-                Organizations using our monitoring system detect cost anomalies faster and cut unnecessary cloud expenses through automated analysis.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Button size="lg" onClick={() => navigate("/signup")} className="shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
-                  Start optimizing today <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </div>
-            </motion.div>
-
-            <div className="grid grid-cols-2 gap-5">
-              {stats.map((s, i) => (
-                <motion.div
-                  key={s.label}
-                  custom={i + 1}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={scaleIn}
-                  className="glass-card-hover p-7 text-center group"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <s.icon className="w-5 h-5 text-primary" />
-                  </div>
-                  <p className="text-4xl sm:text-5xl font-extrabold gradient-text counter-glow">
-                    <AnimatedCounter value={s.value} suffix={s.suffix} />
-                  </p>
-                  <p className="text-sm text-muted-foreground mt-2">{s.label}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <WaveDivider variant="subtle" />
-
-      {/* ── About Us ── */}
-      <section id="about" className="py-24 lg:py-32 section-divider">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center max-w-3xl mx-auto mb-16">
-            <span className="inline-block text-xs font-semibold text-primary uppercase tracking-[0.15em] mb-4 px-4 py-1.5 rounded-full bg-primary/5 border border-primary/20">
-              About Us
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
-              Who <span className="gradient-text">We Are</span>
-            </h2>
-          </motion.div>
-
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInLeft} className="space-y-8">
-              {/* Founder Card */}
-              <div className="glass-card p-8">
-                <div className="flex items-center gap-5 mb-6">
-                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-3xl font-bold text-white shrink-0">
-                    PS
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-foreground">Pankaj Shinde</h3>
-                    <p className="text-primary font-medium text-sm">Founder & Developer</p>
-                  </div>
-                </div>
-                <p className="text-muted-foreground text-base leading-relaxed mb-4">
-                  Pankaj Shinde is the creator of the Cloud Cost Anomaly Detection & Optimization System. He is passionate about developing modern cloud solutions that help organizations analyze cloud usage, detect cost anomalies, and optimize resources effectively.
-                </p>
-                <p className="text-muted-foreground text-base leading-relaxed">
-                  Through this platform, he aims to provide businesses with a powerful yet simple tool to monitor cloud expenses and improve cost efficiency.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInRight} className="space-y-8">
-              <div className="glass-card p-8">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <Sparkles className="w-5 h-5 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground">Our Mission</h3>
-                </div>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                  To help organizations gain better visibility and control over their cloud spending by providing intelligent tools for cost monitoring, anomaly detection, and optimization.
-                </p>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  We aim to simplify cloud cost management and support businesses in making data-driven decisions.
-                </p>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-3">
-                {[
-                  "Multi-cloud cost aggregation",
-                  "Real-time anomaly alerts",
-                  "AI-powered recommendations",
-                  "Custom spending thresholds",
-                  "Team collaboration tools",
-                  "Exportable reports & insights",
-                ].map((item) => (
-                  <div key={item} className="flex items-center gap-3 px-4 py-3 rounded-xl bg-secondary/30 border border-border/30">
-                    <CheckCircle2 className="w-4 h-4 text-[hsl(var(--success))] shrink-0" />
-                    <span className="text-sm text-muted-foreground">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Dashboard Preview */}
-          <motion.div custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scaleIn} className="relative max-w-5xl mx-auto mt-20">
-            <div className="rounded-2xl overflow-hidden border border-border/50 shadow-2xl shadow-primary/10 gradient-border">
-              <img src={dashboardPreview} alt="Cloud Cost ADOS dashboard" className="w-full" loading="lazy" />
-            </div>
-            <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-3/4 h-20 bg-primary/8 blur-3xl rounded-full" />
-          </motion.div>
-        </div>
-      </section>
-
-      <WaveDivider variant="accent" flip />
-
-      {/* ── Testimonials ── */}
-      <section className="py-24 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-16">
-            <span className="inline-block text-xs font-semibold text-primary uppercase tracking-[0.15em] mb-4 px-4 py-1.5 rounded-full bg-primary/5 border border-primary/20">
-              Testimonials
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-              Loved by <span className="gradient-text">cloud teams</span>
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
-              <motion.div
-                key={t.name}
-                custom={i + 1}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                className="glass-card-hover p-8 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center gap-1 mb-4">
-                    {[...Array(5)].map((_, j) => (
-                      <Sparkles key={j} className="w-3.5 h-3.5 text-[hsl(var(--warning))]" />
-                    ))}
-                  </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-6">"{t.quote}"</p>
-                </div>
-                <div>
-                  <div className="inline-block px-3 py-1 rounded-full bg-[hsl(var(--success))]/10 text-[hsl(var(--success))] text-xs font-medium mb-4">
-                    {t.saved}
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full object-cover border-2 border-primary/20" />
-                    <div>
-                      <p className="text-sm font-semibold text-foreground">{t.name}</p>
-                      <p className="text-xs text-muted-foreground">{t.role}</p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <WaveDivider variant="primary" />
-
-      {/* ── FAQ ── */}
-      <section className="py-24 lg:py-32 section-divider">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-              Frequently asked <span className="gradient-text">questions</span>
-            </h2>
-          </motion.div>
-
-          <div className="max-w-2xl mx-auto">
-            <Accordion type="single" collapsible className="space-y-3">
-              {faqs.map((faq, i) => (
-                <motion.div key={i} custom={i + 1} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-                  <AccordionItem value={`faq-${i}`} className="glass-card px-6 border-none rounded-xl">
-                    <AccordionTrigger className="text-sm font-medium text-foreground hover:no-underline">{faq.q}</AccordionTrigger>
-                    <AccordionContent className="text-sm text-muted-foreground leading-relaxed">{faq.a}</AccordionContent>
-                  </AccordionItem>
-                </motion.div>
-              ))}
-            </Accordion>
-          </div>
-        </div>
-      </section>
-
-      <WaveDivider variant="subtle" flip />
-
-      {/* ── CTA Banner ── */}
       <section className="py-24 lg:py-28">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scaleIn} className="relative rounded-3xl overflow-hidden cta-gradient border border-border/30 p-12 sm:p-16 text-center">
@@ -772,12 +462,23 @@ const LandingPage = () => {
               <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8">
                 Join hundreds of teams saving thousands every month with AI-powered cloud cost monitoring.
               </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <Button size="lg" onClick={() => navigate("/login")} className="px-10 h-12 text-base shadow-xl shadow-primary/30 hover:shadow-primary/50 hover:scale-105 transition-all">
-                  <Zap className="w-4 h-4 mr-2" /> Get Started Free
+              <div className="flex flex-wrap justify-center gap-4 relative z-10">
+                <Button
+                  size="lg"
+                  type="button"
+                  onClick={() => (window.location.href = "/login")}
+                  className="px-10 h-12 text-base shadow-xl shadow-primary/30 hover:shadow-primary/50 hover:scale-105 transition-all"
+                >
+                  <Zap className="w-4 h-4 mr-2" /> User Login
                 </Button>
-                <Button size="lg" variant="outline" onClick={() => scrollTo("contact")} className="px-10 h-12 text-base">
-                  Talk to Sales
+                <Button
+                  size="lg"
+                  variant="outline"
+                  type="button"
+                  onClick={() => (window.location.href = "/admin-login")}
+                  className="px-10 h-12 text-base"
+                >
+                  Admin Login
                 </Button>
               </div>
               <p className="mt-6 text-xs text-muted-foreground">No credit card required • Free 14-day trial • Cancel anytime</p>
@@ -788,7 +489,6 @@ const LandingPage = () => {
 
       <WaveDivider variant="accent" />
 
-      {/* ── Contact ── */}
       <section id="contact" className="py-24 lg:py-32 section-divider">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16">
@@ -850,7 +550,6 @@ const LandingPage = () => {
 
       <WaveDivider variant="subtle" flip />
 
-      {/* ── Footer ── */}
       <footer className="border-t border-border/30 py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8">

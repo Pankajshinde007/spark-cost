@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { mockCostData, mockAlerts, mockAnomalies, mockRecommendations } from "@/lib/mockData";
 import { DollarSign, AlertTriangle, Cloud, TrendingUp, TrendingDown, ArrowUpRight, Sparkles } from "lucide-react";
@@ -10,17 +11,24 @@ import {
 const cardVariants = {
   hidden: { opacity: 0, y: 20, scale: 0.97 },
   visible: (i: number) => ({
-    opacity: 1, y: 0, scale: 1,
+    opacity: 1,
+    y: 0,
+    scale: 1,
     transition: { delay: i * 0.08, duration: 0.4, ease: "easeOut" as const },
   }),
 };
 
 const statCards = [
-  { icon: DollarSign, gradient: "from-primary/20 to-primary/5", iconColor: "text-primary", borderGlow: "hover:shadow-primary/10" },
-  { icon: AlertTriangle, gradient: "from-destructive/20 to-destructive/5", iconColor: "text-destructive", borderGlow: "hover:shadow-destructive/10" },
-  { icon: Cloud, gradient: "from-[hsl(var(--cyan))]/20 to-[hsl(var(--cyan))]/5", iconColor: "text-[hsl(var(--cyan))]", borderGlow: "hover:shadow-[hsl(var(--cyan))]/10" },
-  { icon: ArrowUpRight, gradient: "from-success/20 to-success/5", iconColor: "text-success", borderGlow: "hover:shadow-success/10" },
+  { icon: DollarSign, gradient: "from-primary/20 to-primary/5", iconColor: "text-primary" },
+  { icon: AlertTriangle, gradient: "from-destructive/20 to-destructive/5", iconColor: "text-destructive" },
+  { icon: Cloud, gradient: "from-[hsl(var(--cyan))]/20 to-[hsl(var(--cyan))]/5", iconColor: "text-[hsl(var(--cyan))]" },
+  { icon: ArrowUpRight, gradient: "from-success/20 to-success/5", iconColor: "text-success" },
 ];
+
+type CostItem = {
+  service: string;
+  cost: number;
+};
 
 const StatCard = ({ icon: Icon, label, value, change, changeType, index, gradient, iconColor }: any) => (
   <motion.div custom={index} initial="hidden" animate="visible" variants={cardVariants} className="stat-card group">
@@ -29,10 +37,12 @@ const StatCard = ({ icon: Icon, label, value, change, changeType, index, gradien
         <Icon className={`w-5 h-5 ${iconColor}`} />
       </div>
       {change && (
-        <span className={`flex items-center text-[11px] font-semibold px-2 py-0.5 rounded-full ${
-          changeType === 'up' ? 'text-destructive bg-destructive/10' : 'text-success bg-success/10'
-        }`}>
-          {changeType === 'up' ? <TrendingUp className="w-3 h-3 mr-1" /> : <TrendingDown className="w-3 h-3 mr-1" />}
+        <span
+          className={`flex items-center text-[11px] font-semibold px-2 py-0.5 rounded-full ${
+            changeType === "up" ? "text-destructive bg-destructive/10" : "text-success bg-success/10"
+          }`}
+        >
+          {changeType === "up" ? <TrendingUp className="w-3 h-3 mr-1" /> : <TrendingDown className="w-3 h-3 mr-1" />}
           {change}
         </span>
       )}
@@ -43,27 +53,97 @@ const StatCard = ({ icon: Icon, label, value, change, changeType, index, gradien
 );
 
 const DashboardPage = () => {
-  const activeAlerts = mockAlerts.filter(a => a.status === "active").length;
+  const [costData, setCostData] = useState<CostItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [apiError, setApiError] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      setApiError("Login token not found");
+      setLoading(false);
+      return;
+    }
+
+    fetch("http://127.0.0.1:5000/api/cost-data", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then(async (res) => {
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.msg || data.message || "Failed to fetch cost data");
+        }
+
+        setCostData(data.cost_data || []);
+      })
+      .catch((err) => {
+        console.log("Cost data fetch error:", err);
+        setApiError(err.message || "Something went wrong");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  const activeAlerts = mockAlerts.filter((a) => a.status === "active").length;
   const costChange = ((mockCostData.totalCost - mockCostData.previousMonthCost) / mockCostData.previousMonthCost * 100).toFixed(1);
   const totalSavings = mockRecommendations.reduce((s, r) => s + r.potentialSavings, 0);
 
+  const totalBackendCost = costData.reduce((sum, item) => sum + Number(item.cost || 0), 0);
+  const connectedAccounts = "2";
+
   const COLORS = [
-    "hsl(217, 91%, 60%)", "hsl(160, 84%, 39%)", "hsl(38, 92%, 50%)",
-    "hsl(0, 84%, 60%)", "hsl(262, 83%, 58%)", "hsl(187, 92%, 43%)",
+    "hsl(217, 91%, 60%)",
+    "hsl(160, 84%, 39%)",
+    "hsl(38, 92%, 50%)",
+    "hsl(0, 84%, 60%)",
+    "hsl(262, 83%, 58%)",
+    "hsl(187, 92%, 43%)",
   ];
 
-  const labels = ["Total Cloud Cost (MTD)", "Active Alerts", "Connected Accounts", "Potential Savings"];
+  const labels = ["Total Cloud Cost (Backend)", "Active Alerts", "Connected Accounts", "Potential Savings"];
   const values = [
-    `$${mockCostData.totalCost.toLocaleString()}`,
+    `$${totalBackendCost.toLocaleString()}`,
     activeAlerts,
-    "2",
+    connectedAccounts,
     `$${totalSavings.toLocaleString()}/mo`,
   ];
-  const changes = [`${costChange}%`, `${activeAlerts} new`, undefined, "Available"];
-  const changeTypes = ["up", "up", undefined, "down"];
+  const changes = [costData.length > 0 ? "Live Data" : "No Data", `${activeAlerts} new`, undefined, "Available"];
+  const changeTypes = ["down", "up", undefined, "down"];
 
   return (
     <DashboardLayout>
+      <div className="mb-6">
+        <h2 className="text-lg font-semibold">Backend Cloud Cost Data</h2>
+
+        {loading && <p className="text-sm text-muted-foreground mt-2">Loading backend data...</p>}
+
+        {!loading && apiError && (
+          <p className="text-sm text-destructive mt-2">
+            {apiError}
+          </p>
+        )}
+
+        {!loading && !apiError && costData.length === 0 && (
+          <p className="text-sm text-muted-foreground mt-2">
+            No backend cost data found. First add data using <code>/api/cost-data</code>.
+          </p>
+        )}
+
+        {!loading &&
+          !apiError &&
+          costData.map((item, index) => (
+            <p key={index} className="text-sm mt-1">
+              {item.service} - ${item.cost}
+            </p>
+          ))}
+      </div>
+
       <div className="mb-6 flex items-end justify-between">
         <div>
           <div className="flex items-center gap-2 mb-1">
@@ -75,7 +155,6 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      {/* Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         {statCards.map((card, i) => (
           <StatCard
@@ -92,10 +171,13 @@ const DashboardPage = () => {
         ))}
       </div>
 
-      {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
-        {/* Cost Trend */}
-        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="glass-card p-5 lg:col-span-2">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="glass-card p-5 lg:col-span-2"
+        >
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-sm font-semibold text-foreground">Daily Cost Trend</h3>
@@ -112,6 +194,7 @@ const DashboardPage = () => {
               </div>
             </div>
           </div>
+
           <ResponsiveContainer width="100%" height={260}>
             <AreaChart data={mockCostData.dailyCosts}>
               <defs>
@@ -142,23 +225,31 @@ const DashboardPage = () => {
           </ResponsiveContainer>
         </motion.div>
 
-        {/* Service Breakdown */}
-        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="glass-card p-5">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="glass-card p-5"
+        >
           <h3 className="text-sm font-semibold text-foreground mb-4">Cost by Service</h3>
+
           <ResponsiveContainer width="100%" height={180}>
             <PieChart>
               <Pie
-                data={mockCostData.serviceBreakdown}
-                cx="50%" cy="50%"
-                innerRadius={50} outerRadius={75}
+                data={costData}
+                cx="50%"
+                cy="50%"
+                innerRadius={50}
+                outerRadius={75}
                 dataKey="cost"
-                nameKey="name"
+                nameKey="service"
                 stroke="none"
               >
-                {mockCostData.serviceBreakdown.map((_, i) => (
+                {costData.map((_, i) => (
                   <Cell key={i} fill={COLORS[i % COLORS.length]} />
                 ))}
               </Pie>
+
               <Tooltip
                 contentStyle={{
                   backgroundColor: "hsl(222, 47%, 7%)",
@@ -170,27 +261,33 @@ const DashboardPage = () => {
               />
             </PieChart>
           </ResponsiveContainer>
+
           <div className="space-y-2 mt-2">
-            {mockCostData.serviceBreakdown.slice(0, 4).map((s, i) => (
-              <div key={s.name} className="flex items-center justify-between text-xs">
+            {costData.map((s, i) => (
+              <div key={`${s.service}-${i}`} className="flex items-center justify-between text-xs">
                 <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: COLORS[i] }} />
-                  <span className="text-muted-foreground">{s.name}</span>
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: COLORS[i % COLORS.length] }} />
+                  <span className="text-muted-foreground">{s.service}</span>
                 </div>
-                <span className="text-foreground font-semibold">${s.cost.toLocaleString()}</span>
+                <span className="text-foreground font-semibold">${Number(s.cost).toLocaleString()}</span>
               </div>
             ))}
           </div>
         </motion.div>
       </div>
 
-      {/* Anomaly + Recommendations */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="glass-card p-5">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="glass-card p-5"
+        >
           <div className="flex items-center gap-2 mb-4">
             <div className="w-1.5 h-4 rounded-full bg-gradient-to-b from-primary to-accent" />
             <h3 className="text-sm font-semibold text-foreground">Anomaly Detection Results</h3>
           </div>
+
           <div className="overflow-x-auto">
             <table className="w-full text-xs">
               <thead>
@@ -212,11 +309,13 @@ const DashboardPage = () => {
                     <td className="py-2.5 text-right text-muted-foreground">${a.expected.toLocaleString()}</td>
                     <td className="py-2.5 text-right font-mono">{a.score.toFixed(2)}</td>
                     <td className="py-2.5">
-                      <span className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-semibold ${
-                        a.status === "anomaly"
-                          ? "bg-destructive/10 text-destructive ring-1 ring-destructive/20"
-                          : "bg-success/10 text-success ring-1 ring-success/20"
-                      }`}>
+                      <span
+                        className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-semibold ${
+                          a.status === "anomaly"
+                            ? "bg-destructive/10 text-destructive ring-1 ring-destructive/20"
+                            : "bg-success/10 text-success ring-1 ring-success/20"
+                        }`}
+                      >
                         {a.status}
                       </span>
                     </td>
@@ -227,17 +326,32 @@ const DashboardPage = () => {
           </div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="glass-card p-5">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="glass-card p-5"
+        >
           <div className="flex items-center gap-2 mb-4">
             <div className="w-1.5 h-4 rounded-full bg-gradient-to-b from-success to-[hsl(var(--cyan))]" />
             <h3 className="text-sm font-semibold text-foreground">Top Optimization Suggestions</h3>
           </div>
+
           <div className="space-y-2.5">
             {mockRecommendations.slice(0, 4).map((r) => (
-              <div key={r.id} className="flex items-start gap-3 p-3 rounded-xl bg-secondary/30 border border-border/20 hover:border-border/40 hover:bg-secondary/40 transition-all duration-200 group">
-                <div className={`w-2 h-2 mt-1.5 rounded-full flex-shrink-0 ${
-                  r.impact === "high" ? "bg-destructive shadow-sm shadow-destructive/30" : r.impact === "medium" ? "bg-warning shadow-sm shadow-warning/30" : "bg-success shadow-sm shadow-success/30"
-                }`} />
+              <div
+                key={r.id}
+                className="flex items-start gap-3 p-3 rounded-xl bg-secondary/30 border border-border/20 hover:border-border/40 hover:bg-secondary/40 transition-all duration-200 group"
+              >
+                <div
+                  className={`w-2 h-2 mt-1.5 rounded-full flex-shrink-0 ${
+                    r.impact === "high"
+                      ? "bg-destructive shadow-sm shadow-destructive/30"
+                      : r.impact === "medium"
+                      ? "bg-warning shadow-sm shadow-warning/30"
+                      : "bg-success shadow-sm shadow-success/30"
+                  }`}
+                />
                 <div className="flex-1 min-w-0">
                   <p className="text-xs font-medium text-foreground">{r.title}</p>
                   <p className="text-[10px] text-muted-foreground mt-0.5 truncate">{r.description}</p>

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useAuth } from "@/hooks/useAuth";
 import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 import { Zap, Eye, EyeOff, Shield, Sparkles, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { Particles } from "@/components/Particles";
@@ -10,35 +10,79 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
-  const { login } = useAuth();
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const navigate = useNavigate();
+  const { setAuthenticatedUser } = useAuth();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!email || !password) {
       setError("Please fill in all fields");
       return;
     }
-    const success = login(email, password);
-    if (success) {
-      navigate("/dashboard");
-    } else {
-      setError("Invalid credentials");
+
+    try {
+      setLoading(true);
+      setError("");
+
+      const response = await fetch("http://127.0.0.1:5000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email.trim(),
+          password: password,
+        }),
+      });
+
+      const data = await response.json();
+      console.log("Login response:", data);
+
+      if (!response.ok) {
+        setError(data.message || "Invalid email or password");
+        return;
+      }
+
+      if (!data.access_token) {
+        setError("Token not received from server");
+        return;
+      }
+
+      localStorage.setItem("token", data.access_token);
+      localStorage.setItem("userEmail", data.user?.email || "");
+      localStorage.setItem("userName", data.user?.name || "");
+
+      setAuthenticatedUser(data.user?.name || "User", data.user?.email || email.trim());
+
+      console.log("Saved token:", localStorage.getItem("token"));
+
+      navigate("/dashboard", { replace: true });
+    } catch (err) {
+      console.log("Login error:", err);
+      setError("Server error. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Particles */}
       <Particles count={25} />
 
-      {/* Glows */}
       <div className="hero-glow -top-40 -right-40 opacity-20" />
       <div className="hero-glow-purple bottom-0 left-0 opacity-15" />
       <div className="hero-glow-cyan top-1/3 left-1/4 opacity-10" />
 
-      {/* Grid pattern */}
-      <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(hsl(215 20% 25% / 0.15) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: "radial-gradient(hsl(215 20% 25% / 0.15) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
 
       <motion.div
         initial={{ opacity: 0, y: 20, scale: 0.97 }}
@@ -46,10 +90,13 @@ const LoginPage = () => {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="w-full max-w-md relative z-10"
       >
-        <Link to="/" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors mb-6">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors mb-6"
+        >
           <ArrowLeft className="w-3.5 h-3.5" /> Back to home
         </Link>
-        {/* Logo */}
+
         <div className="text-center mb-8">
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto mb-4 shadow-lg neon-glow">
             <Zap className="w-9 h-9 text-primary-foreground" />
@@ -58,12 +105,12 @@ const LoginPage = () => {
           <p className="text-sm text-muted-foreground mt-1">AI-Powered Cloud Cost Monitoring</p>
         </div>
 
-        {/* Form */}
         <div className="glass-card p-8 gradient-border">
-          {/* Free trial banner */}
           <div className="flex items-center gap-2 mb-4 px-3 py-2.5 rounded-lg bg-primary/5 border border-primary/20">
             <Sparkles className="w-4 h-4 text-primary flex-shrink-0" />
-            <p className="text-[11px] text-primary/90 font-medium">🎉 Start your 14-day free trial — no credit card required</p>
+            <p className="text-[11px] text-primary/90 font-medium">
+              🎉 Start your 14-day free trial — no credit card required
+            </p>
           </div>
 
           <div className="flex items-center gap-2 mb-6">
@@ -77,7 +124,10 @@ const LoginPage = () => {
               <input
                 type="email"
                 value={email}
-                onChange={(e) => { setEmail(e.target.value); setError(""); }}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setError("");
+                }}
                 placeholder="you@company.com"
                 className="w-full px-4 py-2.5 rounded-lg bg-secondary/50 border border-border/40 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/30 transition-all"
               />
@@ -89,7 +139,10 @@ const LoginPage = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   value={password}
-                  onChange={(e) => { setPassword(e.target.value); setError(""); }}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setError("");
+                  }}
                   placeholder="••••••••"
                   className="w-full px-4 py-2.5 rounded-lg bg-secondary/50 border border-border/40 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/30 transition-all pr-10"
                 />
@@ -102,8 +155,12 @@ const LoginPage = () => {
                 </button>
               </div>
             </div>
+
             <div className="flex justify-end mt-1">
-              <Link to="/forgot-password" className="text-xs text-muted-foreground hover:text-accent transition-colors">
+              <Link
+                to="/forgot-password"
+                className="text-xs text-muted-foreground hover:text-accent transition-colors"
+              >
                 Forgot password?
               </Link>
             </div>
@@ -120,9 +177,10 @@ const LoginPage = () => {
 
             <button
               type="submit"
-              className="w-full py-2.5 rounded-lg bg-gradient-to-r from-primary to-accent text-primary-foreground font-medium text-sm hover:opacity-90 transition-all neon-glow"
+              disabled={loading}
+              className="w-full py-2.5 rounded-lg bg-gradient-to-r from-primary to-accent text-primary-foreground font-medium text-sm hover:opacity-90 transition-all neon-glow disabled:opacity-60"
             >
-              Sign In
+              {loading ? "Signing In..." : "Sign In"}
             </button>
           </form>
 

@@ -25,26 +25,39 @@ const queryClient = new QueryClient();
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const { isAuthenticated } = useAuth();
-  if (!isAuthenticated) return <Navigate to="/" replace />;
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
   return <>{children}</>;
 };
 
 const AdminRoute = ({ children }: { children: ReactNode }) => {
   const { isAuthenticated, user } = useAuth();
-  if (!isAuthenticated) return <Navigate to="/" replace />;
-  if (user?.role !== "admin") return <Navigate to="/dashboard" replace />;
+
+  if (!isAuthenticated) {
+    return <Navigate to="/admin-login" replace />;
+  }
+
+  if (user?.role !== "admin") {
+    return <Navigate to="/dashboard" replace />;
+  }
+
   return <>{children}</>;
 };
 
 const LoginRoute = () => {
   const { isAuthenticated } = useAuth();
-  if (isAuthenticated) return <Navigate to="/dashboard" replace />;
+
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
   return <LoginPage />;
 };
 
 const PublicRoute = () => {
-  const { isAuthenticated } = useAuth();
-  if (isAuthenticated) return <Navigate to="/dashboard" replace />;
   return <LandingPage />;
 };
 
@@ -59,13 +72,64 @@ const AnimatedRoutes = () => {
         <Route path="/signup" element={<PageTransition><SignUpPage /></PageTransition>} />
         <Route path="/admin-login" element={<PageTransition><AdminLoginPage /></PageTransition>} />
         <Route path="/forgot-password" element={<PageTransition><ForgotPasswordPage /></PageTransition>} />
-        <Route path="/dashboard" element={<ProtectedRoute><PageTransition><DashboardPage /></PageTransition></ProtectedRoute>} />
-        <Route path="/cloud-accounts" element={<ProtectedRoute><PageTransition><CloudAccountsPage /></PageTransition></ProtectedRoute>} />
-        <Route path="/anomalies" element={<ProtectedRoute><PageTransition><AnomaliesPage /></PageTransition></ProtectedRoute>} />
-        <Route path="/alerts" element={<ProtectedRoute><PageTransition><AlertsPage /></PageTransition></ProtectedRoute>} />
-        <Route path="/recommendations" element={<ProtectedRoute><PageTransition><RecommendationsPage /></PageTransition></ProtectedRoute>} />
-        <Route path="/settings" element={<ProtectedRoute><PageTransition><SettingsPage /></PageTransition></ProtectedRoute>} />
-        <Route path="/admin" element={<AdminRoute><PageTransition><AdminPage /></PageTransition></AdminRoute>} />
+
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <PageTransition><DashboardPage /></PageTransition>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/cloud-accounts"
+          element={
+            <ProtectedRoute>
+              <PageTransition><CloudAccountsPage /></PageTransition>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/anomalies"
+          element={
+            <ProtectedRoute>
+              <PageTransition><AnomaliesPage /></PageTransition>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/alerts"
+          element={
+            <ProtectedRoute>
+              <PageTransition><AlertsPage /></PageTransition>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/recommendations"
+          element={
+            <ProtectedRoute>
+              <PageTransition><RecommendationsPage /></PageTransition>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute>
+              <PageTransition><SettingsPage /></PageTransition>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <PageTransition><AdminPage /></PageTransition>
+            </AdminRoute>
+          }
+        />
+
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>
     </AnimatePresence>

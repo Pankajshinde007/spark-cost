@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import {
   LayoutDashboard,
@@ -32,10 +32,16 @@ const adminItems = [
 
 export const AppSidebar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { user, logout } = useAuth();
   const [collapsed, setCollapsed] = useState(false);
 
   const allItems = user?.role === "admin" ? [...navItems, ...adminItems] : navItems;
+
+  const handleLogout = () => {
+    logout();
+    window.location.replace("/");
+  };
 
   return (
     <aside
@@ -47,7 +53,6 @@ export const AppSidebar = () => {
         background: "linear-gradient(180deg, hsl(222 47% 6%) 0%, hsl(222 47% 4%) 100%)",
       }}
     >
-      {/* Logo */}
       <div className="p-4 border-b border-border/20 flex items-center gap-3">
         <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20">
           <Zap className="w-5 h-5 text-primary-foreground" />
@@ -64,15 +69,15 @@ export const AppSidebar = () => {
         )}
       </div>
 
-      {/* Nav label */}
       {!collapsed && (
         <div className="px-5 pt-5 pb-2">
-          <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest">Navigation</p>
+          <p className="text-[10px] font-semibold text-muted-foreground/60 uppercase tracking-widest">
+            Navigation
+          </p>
         </div>
       )}
 
-      {/* Nav */}
-      <nav className="flex-1 px-3 space-y-0.5 overflow-y-auto" style={{ paddingTop: collapsed ? '12px' : '0' }}>
+      <nav className="flex-1 px-3 space-y-0.5 overflow-y-auto" style={{ paddingTop: collapsed ? "12px" : "0" }}>
         {allItems.map((item) => {
           const isActive = location.pathname === item.path;
           return (
@@ -81,12 +86,9 @@ export const AppSidebar = () => {
               to={item.path}
               className={cn(
                 "group relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-200",
-                isActive
-                  ? "text-primary font-medium"
-                  : "text-muted-foreground hover:text-foreground"
+                isActive ? "text-primary font-medium" : "text-muted-foreground hover:text-foreground"
               )}
             >
-              {/* Active indicator */}
               {isActive && (
                 <motion.div
                   layoutId="sidebar-active"
@@ -98,17 +100,18 @@ export const AppSidebar = () => {
                   transition={{ type: "spring", duration: 0.4, bounce: 0.15 }}
                 />
               )}
-              <item.icon className={cn(
-                "w-[18px] h-[18px] flex-shrink-0 relative z-10 transition-colors",
-                isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
-              )} />
+              <item.icon
+                className={cn(
+                  "w-[18px] h-[18px] flex-shrink-0 relative z-10 transition-colors",
+                  isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
+                )}
+              />
               {!collapsed && <span className="relative z-10">{item.label}</span>}
             </Link>
           );
         })}
       </nav>
 
-      {/* Footer */}
       <div className="p-3 border-t border-border/20 space-y-2">
         {!collapsed && user && (
           <div className="px-3 py-2.5 rounded-lg bg-secondary/30">
@@ -119,13 +122,15 @@ export const AppSidebar = () => {
             </span>
           </div>
         )}
+
         <button
-          onClick={logout}
+          onClick={handleLogout}
           className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-all w-full"
         >
           <LogOut className="w-[18px] h-[18px] flex-shrink-0" />
           {!collapsed && <span>Logout</span>}
         </button>
+
         <button
           onClick={() => setCollapsed(!collapsed)}
           className="flex items-center justify-center w-full py-1.5 text-muted-foreground/50 hover:text-foreground transition-colors rounded-lg hover:bg-secondary/30"
