@@ -1,73 +1,164 @@
-# Welcome to your Lovable project
+# SparkCost – Cloud Cost Monitoring & Anomaly Detection Prototype
 
-## Project info
+SparkCost is a full-stack cloud cost monitoring prototype built to track cloud spending, manage cloud account details, and store cost data. The project is designed for DevOps, FinOps, and Multi-Cloud learning.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Project Overview
 
-## How can I edit this code?
+Cloud cost management is an important part of modern DevOps and Multi-Cloud environments. SparkCost helps users manage cloud accounts, add cloud cost data, and monitor spending patterns through a web application.
 
-There are several ways of editing your application.
+This project is currently a prototype and can be further improved with real AWS, Azure, or GCP billing APIs, advanced anomaly detection, dashboards, and alerting features.
 
-**Use Lovable**
+## Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+* User registration and login
+* JWT-based authentication
+* Protected profile route
+* Cloud account management
+* Add and view cloud cost data
+* MongoDB database integration
+* React and TypeScript frontend
+* Python Flask backend API
+* Prototype structure for cloud cost anomaly detection
+* Useful for DevOps, Cloud, FinOps, and Multi-Cloud learning
 
-Changes made via Lovable will be committed automatically to this repo.
+## Tech Stack
 
-**Use your preferred IDE**
+### Frontend
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+* shadcn-ui
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Backend
 
-Follow these steps:
+* Python
+* Flask
+* Flask-CORS
+* Flask-JWT-Extended
+* PyMongo
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Database
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+* MongoDB
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Tools
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+* Git
+* GitHub
+* VS Code
+
+## Project Structure
+
+```bash
+spark-cost/
+│
+├── backend/
+│   ├── app.py
+│   ├── auth.py
+│   ├── database.py
+│   └── models.py
+│
+├── public/
+├── src/
+│   ├── components/
+│   ├── hooks/
+│   ├── lib/
+│   ├── pages/
+│   └── test/
+│
+├── package.json
+├── README.md
+└── tailwind.config.ts
+```
+
+## Backend API Features
+
+### Authentication APIs
+
+* User Register API
+* User Login API
+* JWT Token Authentication
+* Protected Profile API
+
+### Cloud Account APIs
+
+* Add cloud account details
+* View cloud account details
+
+### Cost Data APIs
+
+* Add cloud cost data
+* View cloud cost data
+
+## How to Run the Project
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Pankajshinde007/spark-cost.git
+cd spark-cost
+```
+
+### 2. Install Frontend Dependencies
+
+```bash
+npm install
+```
+
+### 3. Start the Frontend
+
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### 4. Setup Backend
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Go to the backend folder:
 
-**Use GitHub Codespaces**
+```bash
+cd backend
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Install required Python packages:
 
-## What technologies are used for this project?
+```bash
+pip install flask flask-cors flask-jwt-extended pymongo
+```
 
-This project is built with:
+Run the Flask backend:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```bash
+python app.py
+```
 
-## How can I deploy this project?
+### 5. Start MongoDB
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+Make sure MongoDB is running locally:
 
-## Can I connect a custom domain to my Lovable project?
+```bash
+mongodb://localhost:27017/
+```
 
-Yes, you can!
+## Future Improvements
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+* Add real AWS, Azure, or GCP billing API integration
+* Add anomaly detection algorithm for cloud cost spike detection
+* Add cost visualization charts and dashboard
+* Add email or dashboard alerts
+* Add Docker support
+* Add CI/CD pipeline using GitHub Actions or Jenkins
+* Move secret keys and database URL into environment variables
+* Improve authentication security using password hashing
+* Add proper backend models and validations
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Learning Outcome
+
+Through this project, I learned about full-stack development, backend API creation, JWT authentication, MongoDB integration, cloud cost tracking, and the basics of DevOps and FinOps project structure.
+
+## Author
+
+**Pankaj Shinde**
+DevOps & Multi-Cloud Learner
+GitHub: Pankajshinde007
