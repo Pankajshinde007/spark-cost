@@ -1,10 +1,10 @@
 # SparkCost – Cloud Cost Monitoring & Anomaly Detection Prototype
 
-SparkCost is a full-stack cloud cost monitoring prototype built to track cloud spending, manage cloud account details, and store cost data. The project is designed for DevOps, FinOps, and Multi-Cloud learning.
+SparkCost is a full-stack cloud cost monitoring prototype built to track cloud spending, manage cloud account details, and store cost data. The project is designed for AWS, Cloud Computing, FinOps, and cloud cost management learning.
 
 ## Project Overview
 
-Cloud cost management is an important part of modern DevOps and Multi-Cloud environments. SparkCost helps users manage cloud accounts, add cloud cost data, and monitor spending patterns through a web application.
+Cloud cost management is an important part of modern cloud environments. SparkCost helps users manage cloud accounts, add cloud cost data, and monitor spending patterns through a web application.
 
 This project is currently a prototype and can be further improved with real AWS, Azure, or GCP billing APIs, advanced anomaly detection, dashboards, and alerting features.
 
@@ -19,7 +19,7 @@ This project is currently a prototype and can be further improved with real AWS,
 * React and TypeScript frontend
 * Python Flask backend API
 * Prototype structure for cloud cost anomaly detection
-* Useful for DevOps, Cloud, FinOps, and Multi-Cloud learning
+* Useful for AWS, Cloud Computing, FinOps, and cloud cost management learning
 
 ## Tech Stack
 
@@ -51,7 +51,7 @@ This project is currently a prototype and can be further improved with real AWS,
 
 ## Project Structure
 
-```bash
+```text
 spark-cost/
 │
 ├── backend/
@@ -145,7 +145,7 @@ mongodb://localhost:27017/
 
 * Add real AWS, Azure, or GCP billing API integration
 * Add anomaly detection algorithm for cloud cost spike detection
-* Add cost visualization charts and dashboard
+* Add advanced cost visualization charts and dashboard
 * Add email or dashboard alerts
 * Add Docker support
 * Add CI/CD pipeline using GitHub Actions or Jenkins
@@ -155,10 +155,10 @@ mongodb://localhost:27017/
 
 ## Learning Outcome
 
-Through this project, I learned about full-stack development, backend API creation, JWT authentication, MongoDB integration, cloud cost tracking, and the basics of DevOps and FinOps project structure.
+Through this project, I learned about full-stack development, backend API creation, JWT authentication, MongoDB integration, cloud cost tracking, and the basics of cloud cost management and FinOps project structure.
 
 ## Author
 
 **Pankaj Shinde**
-DevOps & Multi-Cloud Learner
-GitHub: Pankajshinde007
+AWS & Cloud Computing Learner
+GitHub: [Pankajshinde007](https://github.com/Pankajshinde007)
