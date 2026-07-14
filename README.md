@@ -8,6 +8,21 @@ Cloud cost management is an important part of modern cloud environments. SparkCo
 
 This project is currently a prototype and can be further improved with real AWS, Azure, or GCP billing APIs, advanced anomaly detection, dashboards, and alerting features.
 
+## What I Built
+
+In this project, I worked on:
+
+* Frontend dashboard pages using React and TypeScript
+* User authentication flow using JWT
+* Backend APIs using Python Flask
+* MongoDB integration for storing user, cloud account, and cost data
+* Demo dashboard views for cloud cost trends, anomaly detection, and optimization suggestions
+
+## Note
+
+This project currently uses prototype/demo data for learning purposes. It does not use real AWS billing APIs yet. Real cloud billing API integration is planned as a future improvement.
+
+
 ## Features
 
 * User registration and login
